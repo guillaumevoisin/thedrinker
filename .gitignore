@@ -3,6 +3,7 @@
 
 # Symfony directories
 /web/bundles/
+!/web/bundles/theme
 /app/logs/*
 /app/cache/*
 /vendor/*

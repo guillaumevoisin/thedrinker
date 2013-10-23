@@ -1,3 +1,13 @@
+ck_application:
+    resource: "@ckApplicationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+ck_dashboard:
+    resource: "@ckDashboardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ck_users:
     resource: "@ckUsersBundle/Controller/"
     type:     annotation

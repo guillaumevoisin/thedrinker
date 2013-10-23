@@ -89,3 +89,19 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+services:
+
+    # Menu
+    application.menu_builder:
+        class: ck\ApplicationBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    application.menu.main:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory_service: application.menu_builder
+        factory_method: createMainMenu
+        arguments: [@request, @security.context, @service_container]
+        scope: request # needed as we have the request as a dependency here
+        tags:
+            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu

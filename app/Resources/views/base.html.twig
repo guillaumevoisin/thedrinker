@@ -1,13 +1,106 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
+    <!-- Declare page as iDevice WebApp friendly -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!-- iDevice WebApp Splash Screen, Regular Icon, iPhone, iPad, iPod Retina Icons -->
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('bundles/theme/images/splash/splash-icon.png') }}"> 
+    <link rel="apple-touch-startup-image" href="{{ asset('bundles/theme/images/splash/splash-screen.png') }}" media="screen and (max-device-width: 320px)" /> 
+    <link rel="apple-touch-startup-image" href="{{ asset('bundles/theme/images/splash/splash-screen@2x.png') }}" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" /> 
+    <link rel="apple-touch-startup-image" href="{{ asset('bundles/theme/images/splash/splash-screen@3x.png') }}" sizes="640x1096">
+
+    <title>{% block title %}Admin{% endblock %}</title>
+
+    {% block stylesheets %}{% endblock %}
+    <link type="image/x-icon"  rel="shortcut icon" href="{{ asset('bundles/theme/images/splash/favicon.ico') }}" />
+    <link type="image/x-icon"  rel="icon"          href="{{ asset('bundles/theme/images/splash/favicon.ico') }}" />
+
+    {% block css %}{% endblock %}
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic|Open+Sans:400italic,400,600|Great+Vibes' rel='stylesheet' type='text/css'>
+
+    {% stylesheets 'bundles/theme/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% javascripts 'bundles/theme/js/*' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% block head %}{% endblock %}
+
+</head>
+<body>
+
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text">
+                Loading the content...
+                <em>Loading depends on your connection speed!</em>
+            </p>
+        </div>
+    </div>
+
+    <div class="page-content">
+
+        <div class="header">
+            <a href="#" class="show-sidebar"></a>
+            <a href="#" class="hide-sidebar"></a>   
+            <p>Welcome!</p>
+            <a href="contact.html" class="header-mail"></a>
+        </div>
+
+        <div class="header-decoration"></div>
+
+        <div class="container">
+            <img class="logo replace-2x" src="{{ asset('bundles/theme/images/misc/logo.png') }}" alt="logo">
+        </div>   
+
+        <div class="content">
+
+            {% block body %}{% endblock %}
+
+        </div>    
+</div>
+
+<div class="page-sidebar">
+  <div class="page-sidebar-scroll">  
+      <a href="tel:+1 23 456 7890" class="sidebar-button"><em class="sidebar-button-call">CALL US</em></a>
+      <a href="sms:+1 23 456 7890" class="sidebar-button"><em class="sidebar-button-text">TEXT US</em></a>
+      <a href="mailto:mail@doamain.com" class="sidebar-button hide2-sidebar"><em class="sidebar-button-close">COLLAPSE</em></a>
+      <div class="clear"></div>  
+
+      <img class="sidebar-logo replace-2x" src="{{ asset('bundles/theme/images/misc/logow.png') }}" alt="img">
+
+      <div class="menu">
+
+          {{ knp_menu_render('main', {'template': 'ckApplicationBundle:Menu:knp_menu.html.twig', 'currentClass': 'menu-enabled', 'navClass': 'mainMenu'}) }}
+
+      </div>
+
+      <p class="sidebar-heading">UPDATES</p>
+      <div class="sidebar-decoration"></div>
+
+      <div class="sidebar-updates">
+          <a href="#" class="update-box update-news">NEW ITEM RELEASED!<br/>21' JAN 2012</a>                        <div class="sidebar-decoration"></div>          
+          <a href="#" class="update-box update-blog">NEW BLOG CATEGORY CREATED<br>20' JAN 2012</a>          <div class="sidebar-decoration"></div>
+          <a href="#" class="update-box update-folio">NEW ITEM ADDED TOO PORTFOLIO<br>19' JAN 2012</a>      <div class="sidebar-decoration"></div>
+          <a href="#" class="update-box update-blog">POST ADDED<br>18' JAN 2012</a>                                 <div class="sidebar-decoration"></div>
+          <a href="#" class="update-box update-folio">NEW ITEM ADDED TOO PORTFOLIO<br>17' JAN 2012</a>      <div class="sidebar-decoration"></div>
+      </div>
+
+      <p class="sidebar-copyright center-text">Copyright 2013. All rights reserved!</p>
+
+      <a href="#" class="sidebar-button"><em class="sidebar-button-facebook">FACEBOOK</em></a>
+      <a href="#" class="sidebar-button"><em class="sidebar-button-twitter">TWITTER</em></a>
+      <a href="#" class="sidebar-button"><em class="sidebar-button-rss">SUBSCRIBE</em></a>   
+      <div class="clear"></div>
+
+  </div>
+</div>
+
+{% block javascripts %}{% endblock %}
+</body>
 </html>
