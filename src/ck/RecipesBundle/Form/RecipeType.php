@@ -17,8 +17,15 @@ class RecipeType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('glassType')
-            ->add('preparationType')
+            ->add('glassType', 'checkbox')
+            ->add('preparationType', 'choice', array(
+                'multiple' => false,
+                'expanded' => true,
+                'choices' => array(
+                    'one' => 'One',
+                    'two' => 'Two'
+                )
+            ))
             ->add('whereToDrink')
             ->add('creator')
             ->add('garnish')

@@ -26,6 +26,9 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    form:
+        resources:
+            - 'ckApplicationBundle:Form:default_fields.html.twig'
 
 # FOS User
 fos_user:
