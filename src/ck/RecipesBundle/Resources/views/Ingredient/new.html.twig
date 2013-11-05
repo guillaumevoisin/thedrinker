@@ -1,15 +1,19 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Ingredient creation</h1>
+    
+	<div class="inner-content">
 
-    {{ form(form) }}
+		<h1>Ingredient creation</h1>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('ingredient') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+		<div class="td-form">
+
+			<div class="up-triangle"></div>
+			
+			{{ form(form) }}
+		
+		</div>
+
+	</div>
+
 {% endblock %}

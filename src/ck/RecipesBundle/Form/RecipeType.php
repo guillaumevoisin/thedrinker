@@ -17,15 +17,8 @@ class RecipeType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('glassType', 'checkbox')
-            ->add('preparationType', 'choice', array(
-                'multiple' => false,
-                'expanded' => true,
-                'choices' => array(
-                    'one' => 'One',
-                    'two' => 'Two'
-                )
-            ))
+            ->add('glassType')
+            ->add('preparationType')
             ->add('whereToDrink')
             ->add('creator')
             ->add('garnish')
@@ -50,6 +43,6 @@ class RecipeType extends AbstractType
      */
     public function getName()
     {
-        return 'ck_recipesbundle_recipe';
+        return 'new_recipe';
     }
 }

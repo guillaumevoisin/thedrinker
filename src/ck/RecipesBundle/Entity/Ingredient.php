@@ -22,9 +22,24 @@ class Ingredient
     protected $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    protected $volume;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    protected $alcoholVolume;
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    protected $age;
 
     /**
      * @ORM\ManyToMany(targetEntity="IngredientsCategory", inversedBy="ingredients")
@@ -140,5 +155,107 @@ class Ingredient
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Set volume
+     *
+     * @param string $volume
+     * @return Ingredient
+     */
+    public function setVolume($volume)
+    {
+        $this->volume = $volume;
+    
+        return $this;
+    }
+
+    /**
+     * Get volume
+     *
+     * @return string 
+     */
+    public function getVolume()
+    {
+        return $this->volume;
+    }
+
+    /**
+     * Set alcoholVolume
+     *
+     * @param string $alcoholVolume
+     * @return Ingredient
+     */
+    public function setAlcoholVolume($alcoholVolume)
+    {
+        $this->alcoholVolume = $alcoholVolume;
+    
+        return $this;
+    }
+
+    /**
+     * Get alcoholVolume
+     *
+     * @return string 
+     */
+    public function getAlcoholVolume()
+    {
+        return $this->alcoholVolume;
+    }
+
+    /**
+     * Set age
+     *
+     * @param string $age
+     * @return Ingredient
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+    
+        return $this;
+    }
+
+    /**
+     * Get age
+     *
+     * @return string 
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Add recipes
+     *
+     * @param \ck\RecipesBundle\Entity\RecipesIngredients $recipes
+     * @return Ingredient
+     */
+    public function addRecipe(\ck\RecipesBundle\Entity\RecipesIngredients $recipes)
+    {
+        $this->recipes[] = $recipes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove recipes
+     *
+     * @param \ck\RecipesBundle\Entity\RecipesIngredients $recipes
+     */
+    public function removeRecipe(\ck\RecipesBundle\Entity\RecipesIngredients $recipes)
+    {
+        $this->recipes->removeElement($recipes);
+    }
+
+    /**
+     * Get recipes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRecipes()
+    {
+        return $this->recipes;
     }
 }

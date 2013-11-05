@@ -2,11 +2,13 @@
 /app/bootstrap*
 
 # Symfony directories
-/web/bundles/
-!/web/bundles/theme
-/app/logs/*
-/app/cache/*
-/vendor/*
+web/bundles
+!web/bundles/theme/
+web/css/*
+web/js/*
+app/logs/*
+app/cache/*
+vendor/*
 
 # Configuration files
-/app/config/parameters.yml
+app/config/parameters.yml

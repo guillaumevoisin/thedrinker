@@ -17,6 +17,17 @@ class IngredientType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('volume', 'choice', array(
+                'expanded' => true,
+                'choices'  => array(
+                    '20'  => '20 cl',
+                    '50'  => '50 cl',
+                    '70'  => '70 cl',
+                    '100' => '100 cl'
+                )
+            ))
+            ->add('alcoholVolume')
+            ->add('age')
             ->add('categories')
         ;
     }

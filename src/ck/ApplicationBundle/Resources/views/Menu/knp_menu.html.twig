@@ -22,7 +22,7 @@
 {% block list %}
 {% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
     <div class="clear"></div>
-    <ul{{ _self.attributes(listAttributes) }}{{ options.navClass is not none ?  ' class=' ~ options.navClass : "" }}>
+    <ul{{ _self.attributes(listAttributes) }}>
         {{ block('children') }}
     </ul>
 {% endif %}

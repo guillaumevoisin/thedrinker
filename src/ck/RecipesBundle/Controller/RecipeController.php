@@ -76,7 +76,12 @@ class RecipeController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Create',
+            'attr' => array(
+                'class' => 'buttonS bGreen'
+            )
+        ));
 
         return $form;
     }
@@ -165,7 +170,12 @@ class RecipeController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Update',
+            'attr' => array(
+                'class' => 'buttonS bGreen'
+            )
+        ));
 
         return $form;
     }

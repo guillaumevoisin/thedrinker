@@ -126,16 +126,19 @@ $(document).ready(function(){
 	//Image Slider//
 	////////////////
 	
-	var slider = new Swipe(document.getElementById('slider'));
-	$('.next-but-swipe').click(function(){
-		slider.prev();
-		return false;
-	});
-	
-	$('.prev-but-swipe').click(function(){
-		slider.next();
-		return false;
-	});
+	if($("#slider").length > 0)
+	{
+		/*var slider = new Swipe(document.getElementById('slider'));
+		$('.next-but-swipe').click(function(){
+			slider.prev();
+			return false;
+		});
+		
+		$('.prev-but-swipe').click(function(){
+			slider.next();
+			return false;
+		});*/
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	//Detect user agent for known mobile devices and show hide elements for each specific element
@@ -260,7 +263,7 @@ $(document).ready(function(){
 	/////////////////
 	//Image Gallery//
 	/////////////////
-	var myPhotoSwipe = $("#gallery a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false, allowUserZoom:false,captionAndToolbarAutoHideDelay:0 });
+	// var myPhotoSwipe = $("#gallery a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false, allowUserZoom:false,captionAndToolbarAutoHideDelay:0 });
 		
 
 
