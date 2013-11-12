@@ -30,6 +30,11 @@ class RecipesIngredients
     protected $proportion;
 
     /**
+     * @ORM\Column(type="string", length=150)
+     */
+    protected $unit;
+
+    /**
      * Set proportion
      *
      * @param string $proportion
@@ -50,6 +55,29 @@ class RecipesIngredients
     public function getProportion()
     {
         return $this->proportion;
+    }
+
+    /**
+     * Set unit
+     *
+     * @param string $unit
+     * @return RecipesIngredients
+     */
+    public function setUnit($unit)
+    {
+        $this->unit = $unit;
+    
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return string 
+     */
+    public function getUnit()
+    {
+        return $this->unit;
     }
 
     /**

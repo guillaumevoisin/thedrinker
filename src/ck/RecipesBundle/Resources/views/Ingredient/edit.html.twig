@@ -1,19 +1,8 @@
 {% extends '::base.html.twig' %}
+{% import '::macros.html.twig' as macros %}
 
 {% block body -%}
     
-    <div class="inner-content">
-
-		<h1>Ingredient category creation</h1>
-
-		<div class="td-form">
-
-			<div class="up-triangle"></div>
-			
-			{{ form(edit_form) }}
-		
-		</div>
-
-	</div>
+    {{ macros.form('Ingredient edition', edit_form) }}
 	
 {% endblock %}

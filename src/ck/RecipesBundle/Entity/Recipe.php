@@ -3,6 +3,8 @@ namespace ck\RecipesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ck\RecipesBundle\Entity\RecipesIngredients as RecipesIngredients;
+use ck\RecipesBundle\Entity\Ingredient as Ingredient;
 
 /**
  * @ORM\Entity
@@ -46,7 +48,7 @@ class Recipe
     protected $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="RecipesIngredients", mappedBy="recipe", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="RecipesIngredients", mappedBy="recipe", cascade={"persist", "remove"}, orphanRemoval=true)
      * */
 
     protected $ingredients;
@@ -300,12 +302,12 @@ class Recipe
     /**
      * Add ingredients
      *
-     * @param \ck\RecipesBundle\Entity\Ingredient $ingredients
+     * @param RecipesIngredients $recipesIngredients
      * @return Recipe
      */
-    public function addIngredient(\ck\RecipesBundle\Entity\Ingredient $ingredients)
+    public function addIngredient(RecipesIngredients $recipesIngredients)
     {
-        $this->ingredients[] = $ingredients;
+        $this->ingredients[] = $recipesIngredients;
     
         return $this;
     }
@@ -313,11 +315,11 @@ class Recipe
     /**
      * Remove ingredients
      *
-     * @param \ck\RecipesBundle\Entity\Ingredient $ingredients
+     * @param RecipesIngredients $recipesIngredients
      */
-    public function removeIngredient(\ck\RecipesBundle\Entity\Ingredient $ingredients)
+    public function removeIngredient(RecipesIngredients $recipesIngredients)
     {
-        $this->ingredients->removeElement($ingredients);
+        $this->ingredients->removeElement($recipesIngredients);
     }
 
     /**
@@ -440,5 +442,10 @@ class Recipe
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

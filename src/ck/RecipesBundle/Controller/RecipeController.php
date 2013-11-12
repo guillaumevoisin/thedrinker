@@ -201,9 +201,11 @@ class RecipeController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('recipe_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('recipe_show', array('id' => $id)));
         }
 
         return array(

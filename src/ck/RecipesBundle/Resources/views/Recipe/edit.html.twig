@@ -1,19 +1,88 @@
 {% extends '::base.html.twig' %}
+{% import '::macros.html.twig' as macros %}
 
 {% block body -%}
     
     <div class="inner-content">
 
-		<h1>Recipe edit</h1>
+		<h1>Recipe edition</h1>
 
 		<div class="td-form">
 
 			<div class="up-triangle"></div>
-			
-			{{ form(edit_form) }}
+
+			{{ form_start(edit_form, {'method': 'POST'}) }}
+
+				{{ form_errors(edit_form) }}
+
+				<input type="hidden" name="_method" value="PUT" />
+
+				<h4 class="recipe-title">{{ form_widget(edit_form.name) }}</h4>
+
+				{% macro prototype(ingredient, itemNum) %}
+					
+					<div class="ingredient-number">#{{ itemNum }}</div>
+
+					<div class="ingredient-form">
+						{{ form_widget(ingredient) }}
+						<p class="remove-row"><a href="#" class="buttonS bRed">Remove</a></p>
+					</div>
+
+				{% endmacro %}
+
+				<h5>Ingredients</h5>
+
+				<ul id="ingredients-fields-list" class="nested-row" data-prototype="{{ form_widget(edit_form.ingredients.vars.prototype) | e }}">
+				{% for ingredient in edit_form.ingredients %}
+					<li>{{_self.prototype(ingredient, loop.index)}}</li>
+				{% endfor %}
+				</ul>
+
+				{{ macros.addItem('add-ingredient', 'add-ingredient.png', '#') }}
+
+				{{ form_rest(edit_form) }}
+
+			{{ form_end(edit_form) }}
 		
 		</div>
 
 	</div>
+
+	<script type="text/javascript">
+	    
+	    jQuery(document).ready(function() {
+	        jQuery('#add-ingredient').click(function() {
+
+	        	var ingredientsCount = jQuery('#ingredients-fields-list li').length;
+	            var ingredientsList = jQuery('#ingredients-fields-list');
+
+	            // grab the prototype template
+	            var newWidget = '<div class="ingredient-form">' + ingredientsList.attr('data-prototype') + '</div>';
+	            // replace the "__name__" used in the id and name of the prototype
+	            // with a number that's unique to your ingredientss
+	            // end name attribute looks like name="contact[ingredientss][2]"
+	            newWidget = newWidget.replace(/__name__/g, ingredientsCount);
+	            ingredientsCount++;
+
+	            // create a new list element and add it to the list
+	            var newLi = jQuery('<li></li>').html(newWidget);
+	            newLi.appendTo(jQuery('#ingredients-fields-list'));
+
+	            jQuery('#ingredients-fields-list li:last-child').prepend('<div class="ingredient-number">#' + ingredientsCount + '</div>');
+
+	            jQuery('#ingredients-fields-list li:last-child .ingredient-form').append('<p class="remove-row"><a href="#" class="buttonS bRed">Remove</a></p>');
+
+	            jQuery('#ingredients-fields-list li:last-child select').width('100%').select2();
+
+	            return false;
+	        });
+
+	        jQuery('#ingredients-fields-list').on('click', '.remove-row', function(){
+	        	$(this).parents("li").remove();
+
+	        	return false;
+	        })
+	    })
+	</script>
 
 {% endblock %}

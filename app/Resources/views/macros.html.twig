@@ -1,0 +1,22 @@
+{# Macro used for building forms (create and update) #}
+{% macro form(title, form) %}
+	<div class="inner-content">
+
+		<h1>{{ title }}</h1>
+
+		<div class="td-form">
+
+			<div class="up-triangle"></div>
+			
+			{{ form(form) }}
+		
+		</div>
+
+	</div>
+{% endmacro %}
+
+{% macro addItem(id, icon, link) %}
+	<p class="add-item">
+		<a href="{{ link }}" id="{{ id }}" class="buttonS"><img src="{{ asset('bundles/theme/images/icon/' ~ icon) }}" /></a>
+	</p>
+{% endmacro %}

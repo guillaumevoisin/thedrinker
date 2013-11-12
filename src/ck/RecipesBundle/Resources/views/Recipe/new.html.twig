@@ -1,4 +1,5 @@
 {% extends '::base.html.twig' %}
+{% import '::macros.html.twig' as macros %}
 
 {% block body -%}
 
@@ -9,8 +10,25 @@
 		<div class="td-form">
 
 			<div class="up-triangle"></div>
-			
-			{{ form(form) }}
+
+			<form action="{{ path('recipe_create') }}" method="post" {{ form_enctype(form) }}>
+
+				{{ form_row(form.name) }}
+
+				{% macro prototype(ingredient) %}
+					
+					{{ form_row(ingredient) }}
+					<ul><li><a href="#">Add</a></li><li><a href="#">Remove</a></li></ul>
+
+				{% endmacro %}
+
+				{% for ingredient in form.ingredients %}
+					{{_self.prototype(ingredient)}}
+				{% endfor %}
+
+				<input type="submit" class="buttonS bGreen">
+
+			</form>
 		
 		</div>
 

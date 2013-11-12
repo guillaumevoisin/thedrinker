@@ -22,7 +22,13 @@ class RecipeType extends AbstractType
             ->add('whereToDrink')
             ->add('creator')
             ->add('garnish')
-            ->add('ingredients')
+            ->add('ingredients', 'collection', array(
+                    'type'         => new RecipesIngredientsType(),
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'prototype'    => true,
+                    'by_reference' => false
+                ))
             ->add('categories')
             ->add('tags')
         ;
@@ -43,6 +49,6 @@ class RecipeType extends AbstractType
      */
     public function getName()
     {
-        return 'new_recipe';
+        return 'recipe';
     }
 }
