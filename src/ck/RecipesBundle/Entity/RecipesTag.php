@@ -63,4 +63,44 @@ class RecipesTag
     {
         return $this->getName();
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->recipes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add recipes
+     *
+     * @param \ck\RecipesBundle\Entity\Recipe $recipes
+     * @return RecipesTag
+     */
+    public function addRecipe(\ck\RecipesBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes[] = $recipes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove recipes
+     *
+     * @param \ck\RecipesBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\ck\RecipesBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
+    }
+
+    /**
+     * Get recipes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRecipes()
+    {
+        return $this->recipes;
+    }
 }

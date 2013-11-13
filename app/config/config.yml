@@ -49,6 +49,14 @@ assetic:
         #yui_css:
         #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 
+liip_imagine:
+    data_root: /web/uploads
+    filter_sets:
+        thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }
+
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -84,6 +92,7 @@ stof_doctrine_extensions:
         default:
             sluggable: true
             timestampable: true
+            blameable: true
 
 # Swiftmailer Configuration
 swiftmailer:

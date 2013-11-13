@@ -253,7 +253,7 @@
 
 {% block form_row %}
 {% spaceless %}
-    <div class="formRow">
+    <div class="formRow {{ attr['class']|default('') }}">
         <div class="input-label">{{ form_label(form) }}</div>
         <div class="input-value">{{ form_widget(form) }}</div>
         {% if form.vars.errors|length %}

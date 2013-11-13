@@ -3,35 +3,6 @@
 
 {% block body -%}
 
-	<div class="inner-content">
-
-		<h1>Recipe creation</h1>
-
-		<div class="td-form">
-
-			<div class="up-triangle"></div>
-
-			<form action="{{ path('recipe_create') }}" method="post" {{ form_enctype(form) }}>
-
-				{{ form_row(form.name) }}
-
-				{% macro prototype(ingredient) %}
-					
-					{{ form_row(ingredient) }}
-					<ul><li><a href="#">Add</a></li><li><a href="#">Remove</a></li></ul>
-
-				{% endmacro %}
-
-				{% for ingredient in form.ingredients %}
-					{{_self.prototype(ingredient)}}
-				{% endfor %}
-
-				<input type="submit" class="buttonS bGreen">
-
-			</form>
-		
-		</div>
-
-	</div>
+	{% include 'ckRecipesBundle:Recipe:recipeForm.html.twig' with { 'title': 'Recipe creation', 'form': form } %}
 
 {% endblock %}

@@ -4918,6 +4918,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bb934f', end
 .td-form .formRow:first-child{ border-top-left-radius: 5px; border-top-right-radius: 5px }
 .td-form .formRow:last-child{ border-bottom-left-radius: 5px; border-bottom-right-radius: 5px }
 .td-form .formRow .input-label{ margin-bottom: 0.5em }
+.td-form .display-none{ display: none; }
 
 .td-form .nested-row{ background: rgb(119, 150, 151) }
 .td-form .nested-row li{ list-style: none; padding: 20px; margin-bottom: 0; border-bottom: 1px solid rgb(114, 142, 143); border-top:1px solid rgb(132, 164, 165); position: relative; }
@@ -4933,6 +4934,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bb934f', end
 .td-form .input-wrapper{ float: left; margin-right: 10px; text-align: center; }
 .td-form .recipe-title{ margin-top: 1em }
 .td-form .recipe-title input{ border: none; -webkit-box-shadow: none; box-shadow: none; font-family: Great Vibes; width: 100%; text-align: center; font-size: 40px; text-shadow:1px 1px #eee; }
+.td-form .recipe-title input::-webkit-input-placeholder { color:#eee; }
+.td-form .recipe-title input::-moz-placeholder { color:#eee; text-shadow:none; } /* firefox 19+ */
+.td-form .recipe-title input:-ms-input-placeholder { color:#eee; text-shadow:none; } /* ie */
+.td-form .recipe-title input:-moz-placeholder { color:#eee; text-shadow:none; }
 .td-form .recipe-title input:hover{ color:#333 }
 .td-form .add-item{ text-align: center; }
 .td-form .remove-row{ text-align: right; margin-bottom: 0 }

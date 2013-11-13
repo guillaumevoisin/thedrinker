@@ -22,7 +22,8 @@ class AppKernel extends Kernel
             new ck\RecipesBundle\ckRecipesBundle(),
             new ck\UsersBundle\ckUsersBundle(),
             new ck\DashboardBundle\ckDashboardBundle(),
-            new ck\ApplicationBundle\ckApplicationBundle()
+            new ck\ApplicationBundle\ckApplicationBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

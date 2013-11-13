@@ -1,0 +1,64 @@
+.inner-content{ max-width: 600px; margin: auto;  }
+.inner-content h1{ margin-bottom: 1em; color: #777; text-shadow: 1px 1px #fff; }
+
+/** Form **/
+
+.td-wrap { background: #fff; border-radius: 5px; border: 1px solid #ccc; -webkit-box-shadow: 0 0 1em #ddd; box-shadow: 0 0 1em #ddd; position: relative; margin-bottom: 30px }
+.td-wrap:after { content: ""; width: 0; height: 0; position: absolute; bottom: 100%; left: 15px; border-width: 0 8px 8px 8px; border-style: solid; border-color: #fff transparent }
+.td-wrap:before { content: ""; width: 0; height: 0; position: absolute; bottom: 100%; left: 13px; border-width: 0 10px 10px 10px; border-style: solid; border-color: rgba(0,0,0,0.15) transparent }
+
+.td-wrap h5{ margin: 0 20px 10px; }
+
+.td-form .formRow{ padding: 20px; border-top:1px solid #fff; border-bottom:1px solid #eee; background: #ffffff; /* Old browsers */ background: -moz-linear-gradient(top,  #ffffff 70%, #f9f9f9 100%); /* FF3.6+ */ background: -webkit-gradient(linear, left top, left bottom, color-stop(70%,#ffffff), color-stop(100%,#f9f9f9)); /* Chrome,Safari4+ */ background: -webkit-linear-gradient(top,  #ffffff 70%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */ background: -o-linear-gradient(top,  #ffffff 70%,#f9f9f9 100%); /* Opera 11.10+ */ background: -ms-linear-gradient(top,  #ffffff 70%,#f9f9f9 100%); /* IE10+ */ background: linear-gradient(to bottom,  #ffffff 70%,#f9f9f9 100%); /* W3C */ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */ }
+.td-form .formRow:first-child{ border-top-left-radius: 5px; border-top-right-radius: 5px }
+.td-form .formRow:last-child{ border-bottom-left-radius: 5px; border-bottom-right-radius: 5px }
+.td-form .formRow .input-label{ margin-bottom: 0.5em }
+.td-form .display-none{ display: none; }
+
+.td-form .nested-row{ background: rgb(119, 150, 151) }
+.td-form .nested-row li{ list-style: none; padding: 20px; margin-bottom: 0; border-bottom: 1px solid rgb(114, 142, 143); border-top:1px solid rgb(132, 164, 165); position: relative; }
+.td-form .nested-row li:first-child{ border-top: none }
+.td-form .nested-row li:last-child{ border-bottom: none }
+.td-form .nested-row li .formRow{ background: none; padding: 0; border:none; margin-bottom: 0.5em }
+.td-form .nested-row li label{ color: #fff }
+
+.td-form .submit{ position: absolute; left: 0; bottom: -40px }
+.td-form label{ font-family: 'Open Sans'; font-size: 14px }
+.td-form input[type="text"], .td-form textarea{ padding:7px; border:1px solid #ccc; border-radius: 3px; font-size: 12px; color:#bbb; box-shadow: 0 0 6px #eee inset; display: inline; width: 100%; font-family: Open Sans }
+.td-form textarea{ min-height: 100px }
+.td-form .input-wrapper{ float: left; margin-right: 10px; text-align: center; }
+.td-form .recipe-title{ margin-top: 1em }
+.td-form .recipe-title input{ border: none; -webkit-box-shadow: none; box-shadow: none; font-family: Great Vibes; width: 100%; text-align: center; font-size: 40px; text-shadow:1px 1px #eee; }
+.td-form .recipe-title input::-webkit-input-placeholder { color:#eee; }
+.td-form .recipe-title input::-moz-placeholder { color:#eee; text-shadow:none; } /* firefox 19+ */
+.td-form .recipe-title input:-ms-input-placeholder { color:#eee; text-shadow:none; } /* ie */
+.td-form .recipe-title input:-moz-placeholder { color:#eee; text-shadow:none; }
+.td-form .recipe-title input:hover{ color:#333 }
+.td-form .add-item{ text-align: center; }
+.td-form .remove-row{ text-align: right; margin-bottom: 0 }
+
+
+/** Show **/
+
+.td-show{ padding: 20px }
+
+/** Recipes **/
+
+.td-form .ingredient-form{ margin-left: 50px }
+.td-form .ingredient-number{ position: absolute; left: 15px; top: 20px; font-family: Great Vibes; font-size: 30px; color:rgb(168, 191, 192); text-shadow: 1px 1px rgb(97, 125, 126) }
+
+/**	Desktop **/
+@media (min-width: 700px) and (orientation: landscape)
+{
+	.td-form .formRow .input-label{
+		float: left;
+		width: 23%;
+		margin-right: 10%;
+		margin-bottom: 0
+	}
+
+	.td-form .formRow .input-value{
+		float: left;
+		width: 67%;
+	}
+}

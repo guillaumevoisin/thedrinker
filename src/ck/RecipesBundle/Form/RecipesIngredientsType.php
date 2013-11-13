@@ -15,9 +15,17 @@ class RecipesIngredientsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('recipe')
+            ->add('recipe', 'entity', array(
+                'class' => 'ckRecipesBundle:Recipe',
+                'attr' => array(
+                    'class' => 'display-none'
+                )
+            ))
             ->add('ingredient')
             ->add('proportion')
+            ->add('baseSpirit', 'checkbox', array(
+                'required' => false
+            ))
             ->add('unit', 'choice', array(
                 'choices' => array(
                     'oz'   => 'oz',

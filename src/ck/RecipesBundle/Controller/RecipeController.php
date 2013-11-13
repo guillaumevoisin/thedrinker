@@ -115,16 +115,16 @@ class RecipeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Recipe entity.');
+        if (!$recipe) {
+            throw $this->createNotFoundException('Unable to find Recipe recipe.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'recipe'      => $recipe,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -190,26 +190,26 @@ class RecipeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Recipe entity.');
+        if (!$recipe) {
+            throw $this->createNotFoundException('Unable to find Recipe recipe.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($recipe);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
 
-            $em->persist($entity);
+            $em->persist($recipe);
             $em->flush();
 
             return $this->redirect($this->generateUrl('recipe_show', array('id' => $id)));
         }
 
         return array(
-            'entity'      => $entity,
+            'recipe'      => $recipe,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );

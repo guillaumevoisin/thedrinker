@@ -15,10 +15,34 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', 'text', array(
+                'attr' => array(
+                    'placeholder' => 'Recipe name'
+                )
+            ))
             ->add('description')
-            ->add('glassType')
-            ->add('preparationType')
+            ->add('file')
+            ->add('glassType', 'choice', array(
+                'expanded' => false,
+                'choices' => array(
+                    'tumbler'       => 'Tumbler',
+                    'martini'       => 'Martini',
+                    'old-fashioned' => 'Old fashioned',
+                    'champagne'     => 'Champagne',
+                    'Margarita'     => 'Margarita',
+                    'highball'      => 'Highball',
+                    'hurricane'     => 'Hurricane',
+                    'wine'          => 'Wine'
+                )
+            ))
+            ->add('preparationType', 'choice', array(
+                'expanded' => true,
+                'choices' => array(
+                    'shaker'  => 'Shaker',
+                    'blender' => 'Blender',
+                    'stirred' => 'Stirred',
+                )
+            ))
             ->add('whereToDrink')
             ->add('creator')
             ->add('garnish')
@@ -31,6 +55,14 @@ class RecipeType extends AbstractType
                 ))
             ->add('categories')
             ->add('tags')
+            ->add('difficulty', 'choice', array(
+                'expanded' => true,
+                'choices' => array(
+                    'easy'     => 'easy',
+                    'moderate' => 'moderate',
+                    'hard'     => 'hard',
+                )
+            ))
         ;
     }
     

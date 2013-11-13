@@ -25,6 +25,11 @@ class RecipesIngredients
     protected $ingredient;
 
     /**
+     * @ORM\Column(type="boolean", name="base_spirit")
+     */
+    protected $baseSpirit;
+
+    /**
      * @ORM\Column(type="string", length=150)
      */
     protected $proportion;
@@ -129,5 +134,28 @@ class RecipesIngredients
     public function __toString()
     {
         return "";
+    }
+
+    /**
+     * Set baseSpirit
+     *
+     * @param boolean $baseSpirit
+     * @return RecipesIngredients
+     */
+    public function setBaseSpirit($baseSpirit)
+    {
+        $this->baseSpirit = $baseSpirit;
+    
+        return $this;
+    }
+
+    /**
+     * Get baseSpirit
+     *
+     * @return boolean 
+     */
+    public function getBaseSpirit()
+    {
+        return $this->baseSpirit;
     }
 }
