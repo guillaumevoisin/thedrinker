@@ -53,12 +53,12 @@ class Recipe
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
+    protected $path;
 
     /**
      * @Assert\File(maxSize="6000000", mimeTypes={"image/jpeg", "image/png", "image/gif"})
      */
-    public $file;
+    protected $file;
 
     /**
      * @ORM\OneToMany(targetEntity="RecipesIngredients", mappedBy="recipe", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -85,32 +85,32 @@ class Recipe
     private $tags;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     protected $glassType;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     protected $preparationType;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     protected $whereToDrink;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     protected $creator;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     protected $garnish;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     protected $difficulty;
 
@@ -365,6 +365,52 @@ class Recipe
     public function getDifficulty()
     {
         return $this->difficulty;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Recipe
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Recipe
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**

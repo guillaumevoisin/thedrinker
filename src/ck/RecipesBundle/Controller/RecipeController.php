@@ -7,13 +7,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Domain\RoleSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
 use ck\RecipesBundle\Entity\Recipe;
 use ck\RecipesBundle\Form\RecipeType;
 
 /**
  * Recipe controller.
  *
- * @Route("/recipe")
+ * @Route("/")
  */
 class RecipeController extends Controller
 {
@@ -21,7 +28,7 @@ class RecipeController extends Controller
     /**
      * Lists all Recipe entities.
      *
-     * @Route("/", name="recipe")
+     * @Route("/recipe", name="recipe")
      * @Method("GET")
      * @Template()
      */
@@ -38,26 +45,46 @@ class RecipeController extends Controller
     /**
      * Creates a new Recipe entity.
      *
-     * @Route("/", name="recipe_create")
+     * @Route("/admin/recipe", name="recipe_create")
      * @Method("POST")
      * @Template("ckRecipesBundle:Recipe:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Recipe();
-        $form = $this->createCreateForm($entity);
+        $recipe = new Recipe();
+        $form = $this->createCreateForm($recipe);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($recipe);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('recipe_show', array('id' => $entity->getId())));
+            // ACL Creation
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($recipe);
+            $acl = $aclProvider->createAcl($objectIdentity);
+
+            // Get current user
+            $securityContext = $this->get('security.context');
+            $user = $securityContext->getToken()->getUser();
+
+            $userSecurityIdentity = UserSecurityIdentity::fromAccount($user);
+            $roleSecurityIdentity = new RoleSecurityIdentity('ROLE_SUPER_ADMIN');
+
+            // Give access to owner
+            $acl->insertObjectAce($userSecurityIdentity, MaskBuilder::MASK_OWNER);
+
+            // Give access to super admin
+            $acl->insertObjectAce($roleSecurityIdentity, MaskBuilder::MASK_MASTER);
+            
+            $aclProvider->updateAcl($acl);
+
+            return $this->redirect($this->generateUrl('recipe_edit', array('id' => $recipe->getId())));
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $recipe,
             'form'   => $form->createView(),
         );
     }
@@ -89,7 +116,7 @@ class RecipeController extends Controller
     /**
      * Displays a form to create a new Recipe entity.
      *
-     * @Route("/new", name="recipe_new")
+     * @Route("/admin/recipe/new", name="recipe_new")
      * @Method("GET")
      * @Template()
      */
@@ -107,7 +134,7 @@ class RecipeController extends Controller
     /**
      * Finds and displays a Recipe entity.
      *
-     * @Route("/{id}", name="recipe_show")
+     * @Route("/recipe/{id}", name="recipe_show")
      * @Method("GET")
      * @Template()
      */
@@ -132,7 +159,7 @@ class RecipeController extends Controller
     /**
      * Displays a form to edit an existing Recipe entity.
      *
-     * @Route("/{id}/edit", name="recipe_edit")
+     * @Route("/admin/recipe/{id}/edit", name="recipe_edit")
      * @Method("GET")
      * @Template()
      */
@@ -140,17 +167,25 @@ class RecipeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Recipe entity.');
+        $securityContext = $this->get('security.context');
+
+        // Check user rights
+        if (false === $securityContext->isGranted('EDIT', $recipe))
+        {
+            throw new AccessDeniedException();
         }
 
-        $editForm = $this->createEditForm($entity);
+        if (!$recipe) {
+            throw $this->createNotFoundException('Unable to find Recipe recipe.');
+        }
+
+        $editForm = $this->createEditForm($recipe);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'recipe'      => $recipe,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
@@ -182,7 +217,7 @@ class RecipeController extends Controller
     /**
      * Edits an existing Recipe entity.
      *
-     * @Route("/{id}", name="recipe_update")
+     * @Route("/admin/recipe/{id}", name="recipe_update")
      * @Method("PUT")
      * @Template("ckRecipesBundle:Recipe:edit.html.twig")
      */
@@ -191,6 +226,14 @@ class RecipeController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+
+        $securityContext = $this->get('security.context');
+
+        // Check user rights
+        if (false === $securityContext->isGranted('EDIT', $recipe))
+        {
+            throw new AccessDeniedException();
+        }
 
         if (!$recipe) {
             throw $this->createNotFoundException('Unable to find Recipe recipe.');
@@ -217,7 +260,7 @@ class RecipeController extends Controller
     /**
      * Deletes a Recipe entity.
      *
-     * @Route("/{id}", name="recipe_delete")
+     * @Route("/admin/recipe/{id}", name="recipe_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -227,13 +270,21 @@ class RecipeController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+            $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Recipe entity.');
+            $securityContext = $this->get('security.context');
+
+            // Check user rights
+            if (false === $securityContext->isGranted('DELETE', $recipe))
+            {
+                throw new AccessDeniedException();
             }
 
-            $em->remove($entity);
+            if (!$recipe) {
+                throw $this->createNotFoundException('Unable to find Recipe recipe.');
+            }
+
+            $em->remove($recipe);
             $em->flush();
         }
 

@@ -10,34 +10,52 @@
 
 			{{ form_errors(form) }}
 
-			<input type="hidden" name="_method" value="PUT" />
+            {% if mode != 'new' %}
+                <input type="hidden" name="_method" value="PUT" />
+            {% endif %}
 
 			<h4 class="recipe-title">{{ form_widget(form.name) }}</h4>
 
-			{% macro prototype(ingredient, itemNum) %}
-				
-				<div class="ingredient-number">#{{ itemNum }}</div>
+            {{ form_row(form.description) }}
 
-				<div class="ingredient-form">
-					{{ form_widget(ingredient) }}
-					<p class="remove-row"><a href="#" class="buttonS bRed">Remove</a></p>
-				</div>
+            {{ form_row(form.submit) }}
 
-			{% endmacro %}
+            {% if mode != 'new' %}
+    
+    			{% macro prototype(ingredient, itemNum) %}
+    				
+    				<div class="ingredient-number">#{{ itemNum }}</div>
 
-			<h5>Ingredients</h5>
+    				<div class="ingredient-form">
+    					{{ form_widget(ingredient) }}
+    					<p class="remove-row"><a href="#" class="buttonS bRed">Remove</a></p>
+    				</div>
 
-			<ul id="ingredients-fields-list" class="nested-row" data-prototype="{{ form_widget(form.ingredients.vars.prototype) | e }}">
-			{% for ingredient in form.ingredients %}
-				<li>{{_self.prototype(ingredient, loop.index)}}</li>
-			{% endfor %}
-			</ul>
+    			{% endmacro %}
 
-			{{ macros.addItem('add-ingredient', 'add-ingredient.png', '#') }}
+    			<h5>Ingredients</h5>
 
-			{{ form_rest(form) }}
+    			<ul id="ingredients-fields-list" class="nested-row" data-prototype="{{ form_widget(form.ingredients.vars.prototype) | e }}">
+    			{% for ingredient in form.ingredients %}
+    				<li>{{_self.prototype(ingredient, loop.index)}}</li>
+    			{% endfor %}
+    			</ul>
 
-		{{ form_end(form) }}
+    			{{ macros.addItem('add-ingredient', 'add-ingredient.png', '#') }}
+
+                {{ form_row(form.file) }}
+                {{ form_row(form.glassType) }}
+                {{ form_row(form.preparationType) }}
+                {{ form_row(form.whereToDrink) }}
+                {{ form_row(form.creator) }}
+                {{ form_row(form.garnish) }}
+                {{ form_row(form.difficulty) }}
+
+            {% endif %}
+
+			{{ form_widget(form._token) }}
+
+		{{ form_end(form, {'render_rest': false}) }}
 	
 	</div>
 

@@ -4,8 +4,8 @@
 # Symfony directories
 web/bundles/*
 !web/bundles/theme/
-web/css/*
-web/js/*
+web/css
+web/js
 web/media/*
 web/uploads/*
 app/logs/*

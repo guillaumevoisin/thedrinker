@@ -3,37 +3,91 @@
 {% block body -%}
     <div class="inner-content">
 
-        <h1>{{ recipe.name }}</h1>
-
         <div class="td-wrap td-show">
 
-            <div class="up-triangle"></div>
+            <figure class="cocktail-img">
+                <img src="{{ asset(recipe.getWebPath) | imagine_filter('cocktail_view') }}"/>
+            </figure>
 
-            <p>{{ recipe.description }}</p>
+            <h1>{{ recipe.name }}</h1>
 
-            <p><img src="{{ asset(recipe.getWebPath) | imagine_filter('thumb') }}"/></p>
+            <div class="separator"></div>
 
-            {% for ing in recipe.ingredients %}
+            <section class="cocktail-desc">
+                
+                <div class="howto">
+                    <p>{{ recipe.glassType }}</p>
+                    <p>{{ recipe.creator }}</p>
+                    <p>{{ recipe.garnish }}</p>
+                    <p>{{ recipe.difficulty }}</p>
+                </div>
 
-                {{ ing.ingredient }} : {{ ing.proportion }}
+                <div class="text">
+                    <p>{{ recipe.description }}</p>
+                </div>
 
-            {% endfor %}
+                <div class="clear"></div>
+
+            </section>
+
+            <section class="cocktail-ingredients">
+                <ul>
+                {% for ing in recipe.ingredients %}
+
+                    <li class="ingredient">
+
+                        <div class="number">#{{ loop.index }}</div>
+                        <div class="info">
+                            <span class="proportion">{{ ing.proportion }} {{ ing.unit }}</span> <span class="ingredient-name">{{ ing.ingredient }}</span></h4>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+
+                {% endfor %}
+                </ul>
+            </section>
+
+            <div class="separator nomarginbottom"></div>
+
+            <div class="actions-buttons">
+                
+                <div class="action">
+                    <a href="#"><img src="{{ asset('bundles/theme/images/icon/recipe/share.png') }}" alt="Share"></a>
+                </div>
+
+                <div class="action share">
+                    <a href="#"><img src="{{ asset('bundles/theme/images/icon/recipe/share.png') }}" alt="Share"></a>
+                </div>
+
+                <div class="action comment">
+                    <a href="#"><img src="{{ asset('bundles/theme/images/icon/recipe/comment.png') }}" alt="Comment"></a>
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
         
         </div>
 
+        {% if is_granted('OPERATOR', recipe) %}
+
         <ul class="record_actions">
             <li>
-                <a href="{{ path('recipe') }}">
-                    Back to the list
-                </a>
+                <a class="buttonS bGreyish" href="{{ path('recipe') }}">Back to the list</a>
             </li>
             <li>
-                <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">
-                    Edit
-                </a>
+                <a class="buttonS bGreen" href="{{ path('recipe_edit', { 'id': recipe.id }) }}">Edit</a>
             </li>
-            <li>{{ form(delete_form) }}</li>
+            <li>
+                <form style="display:inline" action="{{ path('recipe_delete', { 'id': recipe.id }) }}" method="post">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    {{ form_widget(delete_form._token) }}
+                    <input type="submit" class="buttonS bRed" value="Delete" />
+                </form>
+            </li>
         </ul>
+
+        {% endif %}
 
     </div>
 
