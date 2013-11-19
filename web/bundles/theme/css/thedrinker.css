@@ -26,7 +26,7 @@
 
 .td-form .submit{ position: absolute; left: 0; bottom: -40px }
 .td-form label{ font-family: 'Open Sans'; font-size: 14px }
-.td-form input[type="text"], .td-form textarea{ padding:7px; border:1px solid #ccc; border-radius: 3px; font-size: 12px; color:#bbb; box-shadow: 0 0 6px #eee inset; display: inline; width: 100%; font-family: Open Sans }
+.td-form input[type="text"], .td-form input[type="password"], .td-form textarea{ padding:7px; border:1px solid #ccc; border-radius: 3px; font-size: 12px; color:#bbb; box-shadow: 0 0 6px #eee inset; display: inline; width: 100%; font-family: Open Sans }
 .td-form textarea{ min-height: 100px }
 .td-form .input-wrapper{ float: left; margin-right: 10px; text-align: center; }
 .td-form .recipe-title{ margin-top: 1em }

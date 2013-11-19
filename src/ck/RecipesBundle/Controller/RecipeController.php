@@ -28,7 +28,7 @@ class RecipeController extends Controller
     /**
      * Lists all Recipe entities.
      *
-     * @Route("/recipe", name="recipe")
+     * @Route("/recipes", name="recipe")
      * @Method("GET")
      * @Template()
      */
@@ -45,7 +45,7 @@ class RecipeController extends Controller
     /**
      * Creates a new Recipe entity.
      *
-     * @Route("/admin/recipe", name="recipe_create")
+     * @Route("/admin/recipes", name="recipe_create")
      * @Method("POST")
      * @Template("ckRecipesBundle:Recipe:new.html.twig")
      */
@@ -116,7 +116,7 @@ class RecipeController extends Controller
     /**
      * Displays a form to create a new Recipe entity.
      *
-     * @Route("/admin/recipe/new", name="recipe_new")
+     * @Route("/admin/recipes/new", name="recipe_new")
      * @Method("GET")
      * @Template()
      */
@@ -134,21 +134,21 @@ class RecipeController extends Controller
     /**
      * Finds and displays a Recipe entity.
      *
-     * @Route("/recipe/{id}", name="recipe_show")
+     * @Route("/recipes/{slug}", name="recipe_show")
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->findOneBySlug($slug);
 
         if (!$recipe) {
             throw $this->createNotFoundException('Unable to find Recipe recipe.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($recipe->getId());
 
         return array(
             'recipe'      => $recipe,
@@ -159,7 +159,7 @@ class RecipeController extends Controller
     /**
      * Displays a form to edit an existing Recipe entity.
      *
-     * @Route("/admin/recipe/{id}/edit", name="recipe_edit")
+     * @Route("/admin/recipes/{id}/edit", name="recipe_edit")
      * @Method("GET")
      * @Template()
      */
@@ -217,7 +217,7 @@ class RecipeController extends Controller
     /**
      * Edits an existing Recipe entity.
      *
-     * @Route("/admin/recipe/{id}", name="recipe_update")
+     * @Route("/admin/recipes/{id}", name="recipe_update")
      * @Method("PUT")
      * @Template("ckRecipesBundle:Recipe:edit.html.twig")
      */
@@ -260,7 +260,7 @@ class RecipeController extends Controller
     /**
      * Deletes a Recipe entity.
      *
-     * @Route("/admin/recipe/{id}", name="recipe_delete")
+     * @Route("/admin/recipes/{id}", name="recipe_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
