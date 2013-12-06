@@ -1,0 +1,34 @@
+recipes:
+    title: Recipes
+    form:
+        add: New recipe
+        edit: Update recipe
+        create: Create
+        update: Update
+        name: Name
+        description: Description
+        file: Picture
+        glassType: Type of glass
+        preparationType: Preparation
+        whereToDrink: Where to drink
+        creator: Creator
+        garnish: Garnish
+        difficulty: Difficulty
+        categories: Categories
+        tags: Tags
+        ingredients:
+            ingredient: Ingredient
+            base_spirit: Base spirit
+            proportion: Proportion
+            unit: Unit
+    ingredients: Ingredients
+
+ingredients:
+    form:
+        name: Name
+        description: Description
+        volume: Volume
+        alcoholVolume: Alcohol volume
+        age: Age
+        categories: Categories
+

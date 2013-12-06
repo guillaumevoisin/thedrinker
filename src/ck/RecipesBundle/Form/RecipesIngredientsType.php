@@ -21,12 +21,19 @@ class RecipesIngredientsType extends AbstractType
                     'class' => 'display-none'
                 )
             ))
-            ->add('ingredient')
-            ->add('proportion')
+            ->add('ingredient', 'entity', array(
+                'class' => 'ckRecipesBundle:Ingredient',
+                'label' => 'recipes.form.ingredients.ingredient'
+            ))
+            ->add('proportion', 'text', array(
+                'label' => 'recipes.form.ingredients.proportion'
+            ))
             ->add('baseSpirit', 'checkbox', array(
-                'required' => false
+                'required' => false,
+                'label' => 'recipes.form.ingredients.base_spirit'
             ))
             ->add('unit', 'choice', array(
+                'label' => 'recipes.form.ingredients.unit',
                 'choices' => array(
                     'oz'   => 'oz',
                     'cl'   => 'cl',

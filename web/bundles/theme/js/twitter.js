@@ -97,5 +97,5 @@ twitter_feed = {
 
 
 $(document).ready(function () {
-	twitter_feed.loadTweets();
+	// twitter_feed.loadTweets();
 });

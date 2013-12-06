@@ -30,11 +30,34 @@ twig:
         resources:
             - 'ckApplicationBundle:Form:default_fields.html.twig'
 
+sensio_framework_extra:
+    view:
+        annotations: false
+
 # FOS User
 fos_user:
     db_driver: orm
     firewall_name: main
     user_class: ck\UsersBundle\Entity\User
+
+# FOS REST
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml: true
+            json : true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+    routing_loader:
+        default_format: json
 
 # Assetic Configuration
 assetic:

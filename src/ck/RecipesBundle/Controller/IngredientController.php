@@ -13,7 +13,7 @@ use ck\RecipesBundle\Form\IngredientType;
 /**
  * Ingredient controller.
  *
- * @Route("/ingredient")
+ * @Route("/")
  */
 class IngredientController extends Controller
 {
@@ -21,7 +21,7 @@ class IngredientController extends Controller
     /**
      * Lists all Ingredient entities.
      *
-     * @Route("/", name="ingredient")
+     * @Route("/ingredients", name="ingredient")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class IngredientController extends Controller
     /**
      * Creates a new Ingredient entity.
      *
-     * @Route("/", name="ingredient_create")
+     * @Route("/admin/ingredients", name="ingredient_create")
      * @Method("POST")
      * @Template("ckRecipesBundle:Ingredient:new.html.twig")
      */
@@ -71,9 +71,12 @@ class IngredientController extends Controller
     */
     private function createCreateForm(Ingredient $entity)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(new IngredientType(), $entity, array(
             'action' => $this->generateUrl('ingredient_create'),
             'method' => 'POST',
+            'em'     => $em
         ));
 
         $form->add('submit', 'submit', array(
@@ -89,12 +92,12 @@ class IngredientController extends Controller
     /**
      * Displays a form to create a new Ingredient entity.
      *
-     * @Route("/new", name="ingredient_new")
+     * @Route("/admin/ingredients/new", name="ingredient_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
-    {
+    {        
         $entity = new Ingredient();
         $form   = $this->createCreateForm($entity);
 
@@ -107,7 +110,7 @@ class IngredientController extends Controller
     /**
      * Finds and displays a Ingredient entity.
      *
-     * @Route("/{id}", name="ingredient_show")
+     * @Route("/ingredients/{id}", name="ingredient_show")
      * @Method("GET")
      * @Template()
      */
@@ -132,7 +135,7 @@ class IngredientController extends Controller
     /**
      * Displays a form to edit an existing Ingredient entity.
      *
-     * @Route("/{id}/edit", name="ingredient_edit")
+     * @Route("/admin/ingredients/{id}/edit", name="ingredient_edit")
      * @Method("GET")
      * @Template()
      */
@@ -165,9 +168,12 @@ class IngredientController extends Controller
     */
     private function createEditForm(Ingredient $entity)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(new IngredientType(), $entity, array(
             'action' => $this->generateUrl('ingredient_update', array('id' => $entity->getId())),
             'method' => 'PUT',
+            'em'     => $em
         ));
 
         $form->add('submit', 'submit', array(
@@ -179,10 +185,11 @@ class IngredientController extends Controller
 
         return $form;
     }
+    
     /**
      * Edits an existing Ingredient entity.
      *
-     * @Route("/{id}", name="ingredient_update")
+     * @Route("/admin/ingredients/{id}", name="ingredient_update")
      * @Method("PUT")
      * @Template("ckRecipesBundle:Ingredient:edit.html.twig")
      */
@@ -212,10 +219,11 @@ class IngredientController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Ingredient entity.
      *
-     * @Route("/{id}", name="ingredient_delete")
+     * @Route("/ingredients/{id}", name="ingredient_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)

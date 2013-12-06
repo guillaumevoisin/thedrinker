@@ -1,17 +1,85 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-
-	<div class="inner-content">
-
-		<h1>Dashboard</h1>
-
-        <div class="td-wrap td-show">
     				
-			Hello
+	<script type="text/x-handlebars" data-template-name="application">
+        <div class="inner-content">
+            {% verbatim %}
+                {{outlet}}
+            {% endverbatim %}
+        </div>
+    </script>
 
-    	</div>
+    <script type="text/x-handlebars" data-template-name="recipes">
+        {% verbatim %}
+        	{{ view App.RecipesListView }}
+        	<div class="row">
+        		{{ outlet }}
+        	</div>
+        {% endverbatim %}
+    </script>
 
-    </div>
+    <script type="text/x-handlebars" data-template-name="recipe/show">
+        {% verbatim %}
+            <div class="td-wrap td-show">
+
+                <figure class="cocktail-img">
+                    <img {{ bindAttr src="controller.path" alt="controller.name" }} />
+                </figure>
+
+                <h1>{{ controller.name }}</h1>
+
+                <div class="separator"></div>
+
+                <section class="cocktail-desc">
+                
+                    <div class="howto">
+                        <p>{{ controller.glassType }}</p>
+                        <p>{{ controller.creator }}</p>
+                        <p>{{ controller.garnish }}</p>
+                        <p>{{ controller.difficulty }}</p>
+                    </div>
+
+                    <div class="text">
+                        <p>{{ controller.description }}</p>
+                    </div>
+
+                    <div class="clear"></div>
+
+                </section>
+
+                <div class="separator nomarginbottom"></div>
+
+                {% endverbatim %}
+                <div class="actions-buttons">
+                    
+                    <div class="action">
+                        <a href="#"><img src="{{ asset('bundles/theme/images/icon/recipe/like.png') }}" alt="Like"></a>
+                    </div>
+
+                    <div class="action share">
+                        <a href="#"><img src="{{ asset('bundles/theme/images/icon/recipe/share.png') }}" alt="Share"></a>
+                    </div>
+
+                    <div class="action comment">
+                        <a href="#"><img src="{{ asset('bundles/theme/images/icon/recipe/comment.png') }}" alt="Comment"></a>
+                    </div>
+
+                </div>
+                {% verbatim %}
+
+                <div class="clear"></div>
+
+            </div>
+
+            {{#linkTo "recipes"}}Recipes{{/linkTo}}
+        {% endverbatim %}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="_recipe">
+        {% verbatim %}
+        	{{#link-to 'recipe.show' view.content}}{{ view.content.name }}{{/link-to}}
+        {% endverbatim %}
+    </script>
 
 {% endblock %}

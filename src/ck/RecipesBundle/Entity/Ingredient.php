@@ -2,6 +2,7 @@
 namespace ck\RecipesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -28,16 +29,34 @@ class Ingredient
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 150,
+     *      minMessage = "ingredients.form.volume_minimum",
+     *      maxMessage = "ingredients.form.volume_maximum"
+     * )
      */
     protected $volume;
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 80,
+     *      minMessage = "ingredients.form.alcohol_volume_minimum",
+     *      maxMessage = "ingredients.form.alcohol_volume_maximum"
+     * )
      */
     protected $alcoholVolume;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 50,
+     *      minMessage = "ingredients.form.age_minimum",
+     *      maxMessage = "ingredients.form.age_maximum"
+     * )
      */
     protected $age;
 
@@ -150,6 +169,14 @@ class Ingredient
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
     }
 
     public function __toString()

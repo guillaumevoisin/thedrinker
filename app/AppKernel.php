@@ -23,7 +23,11 @@ class AppKernel extends Kernel
             new ck\UsersBundle\ckUsersBundle(),
             new ck\DashboardBundle\ckDashboardBundle(),
             new ck\ApplicationBundle\ckApplicationBundle(),
-            new Liip\ImagineBundle\LiipImagineBundle()
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Bazinga\ExposeTranslationBundle\BazingaExposeTranslationBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
