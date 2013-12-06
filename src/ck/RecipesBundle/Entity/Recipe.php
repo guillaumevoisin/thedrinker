@@ -8,10 +8,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use ck\RecipesBundle\Entity\RecipesIngredients as RecipesIngredients;
 use ck\RecipesBundle\Entity\Ingredient as Ingredient;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Accessor;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="recipes")
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all") 
  */
 class Recipe
 {
@@ -19,23 +24,27 @@ class Recipe
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Expose
      */
     protected $name;
 
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=128, unique=true)
+     * @Expose
      */
     private $slug;
 
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
+     * @Expose
      */
     private $created;
 
@@ -47,11 +56,14 @@ class Recipe
 
     /**
      * @ORM\Column(type="text")
+     * @Expose
      */
     protected $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Expose
+     * @Accessor(getter="getEmbedPath")
      */
     protected $path;
 
@@ -86,31 +98,37 @@ class Recipe
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Expose
      */
     protected $glassType;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Expose
      */
     protected $preparationType;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Expose
      */
     protected $whereToDrink;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Expose
      */
     protected $creator;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Expose
      */
     protected $garnish;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Expose
      */
     protected $difficulty;
 
@@ -480,6 +498,14 @@ class Recipe
     }
 
     /**
+     * Set categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+    }
+
+    /**
      * Add tags
      *
      * @param \ck\RecipesBundle\Entity\RecipesTag $tags
@@ -510,6 +536,14 @@ class Recipe
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 
     /**
@@ -636,6 +670,11 @@ class Recipe
     public function getWebPath()
     {
         return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+    }
+
+    public function getEmbedPath()
+    {
+        return '../' . $this->getWebPath();
     }
 
     protected function getUploadRootDir()

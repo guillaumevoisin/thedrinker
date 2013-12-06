@@ -3,6 +3,7 @@
 namespace ck\RecipesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -243,5 +244,71 @@ class RecipesTagController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists Recipes tags entities for autocomplete fields.
+     *
+     * @Route("/recipes_tags_autocomplete", name="recipes_tags_aucomplete", options={"expose"=true})
+     */
+    public function recipesTagsAutoCompleteAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $term = $request->request->get('q');
+        $page = $request->request->get('page');
+        $nb_results = $request->request->get('page_limit');
+
+        $recipesTags = $em->getRepository('ckRecipesBundle:RecipesTag')->findLikeName($term, $page, $nb_results);
+        $total_results = $em->getRepository('ckRecipesBundle:RecipesTag')->getNbResults($term);
+
+        $recipesTagsList = array();
+
+        if($recipesTags)
+        {
+            foreach ($recipesTags as $recipesTag)
+            {
+                $recipesTagsList[] = array(
+                    'id'          => $recipesTag->getId(),
+                    'title'       => $recipesTag->getName()
+                );
+            }
+        }
+
+        $response = new Response(json_encode(array('items' => $recipesTagsList, 'total' => $total_results)));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    /**
+     * Retrieve an Ingredient Tag entity
+     *
+     * @Route("/{ids}", name="recipes_tags_get", options={"expose"=true})
+     */
+    public function getAction(Request $request, $ids)
+    {
+        $recipesTags_ids = array($ids);
+
+        if(preg_match("/,/", $ids))
+            $recipesTags_ids = explode(",", $ids);
+
+        $em = $this->getDoctrine()->getManager();
+        $recipesTags = $em->getRepository('ckRecipesBundle:RecipesTag')->findBy( array('id' => $recipesTags_ids) );
+
+        if(!$recipesTags)
+            throw new v3dException($this->get('translator')->trans( 'recipesTags #' . $ids . ' can\'t be found' ));
+
+        $recipesTagList = array();
+
+        foreach ($recipesTags as $recipesTag)
+        {
+            $recipesTagList[] = array(
+                'id'          => $recipesTag->getId(),
+                'title'       => $recipesTag->getName()
+            );
+        }
+
+        return new Response(json_encode($recipesTagList));
     }
 }

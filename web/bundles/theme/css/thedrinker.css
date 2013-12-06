@@ -2,6 +2,12 @@
 
 .inner-content{ max-width: 600px; margin: auto;  }
 .inner-content h1{ margin-bottom: 1em; color: #777; text-shadow: 1px 1px #fff; }
+h2.logo{ text-align: center; font-family: Great Vibes; font-size: 30px }
+
+/** Select2 dropdown **/
+
+.search-item h4{ font-size: 14px; margin: 0; padding: 0; }
+.select2-highlighted .search-item h4{ color: #fff; }
 
 /** Form **/
 
@@ -40,6 +46,10 @@
 .td-form .remove-row{ text-align: right; margin-bottom: 0 }
 
 .record_actions li{ float: left; list-style: none; margin-right: 10px }
+
+/* Errors */
+.td-form .formRow .error{ margin-top: 0.5em }
+.td-form .formRow .error li{ list-style: none; color:#E80000; background: url(../images/lists/stop_16.png) no-repeat left center; padding-left: 25px; }
 
 
 /** Show **/

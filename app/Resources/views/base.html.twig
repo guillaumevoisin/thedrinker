@@ -25,7 +25,12 @@
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 
-    {% javascripts 'bundles/theme/js/*' %}
+    <script type="text/javascript" src="{{ asset('bundles/bazingaexposetranslation/js/translator.min.js') }}"></script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% javascripts 'bundles/theme/js/*' output='js/compiled/main.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -37,8 +42,8 @@
     <div id="preloader">
         <div id="status">
             <p class="center-text">
-                Loading the content...
-                <em>Loading depends on your connection speed!</em>
+                {% trans %}general.loading_content{% endtrans %}
+                <em>{% trans %}general.loading_content_desc{% endtrans %}</em>
             </p>
         </div>
     </div>
@@ -48,17 +53,16 @@
         <div class="header">
             <a href="#" class="show-sidebar"></a>
             <a href="#" class="hide-sidebar"></a>   
-            <p>Welcome!</p>
             <a href="contact.html" class="header-mail"></a>
         </div>
 
         <div class="header-decoration"></div>
 
         <div class="container">
-            <img class="logo replace-2x" src="{{ asset('bundles/theme/images/misc/logo.png') }}" alt="logo">
+            <h2 class="logo title">{% trans %}general.application_name{% endtrans %}</h2>
         </div>   
 
-        <div class="content">
+        <div class="content" id="main-content">
 
             {% block body %}{% endblock %}
 

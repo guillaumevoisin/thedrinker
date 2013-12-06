@@ -4,7 +4,7 @@ namespace ck\RecipesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ck\RecipesBundle\Entity\IngredientsCategoryRepository")
  * @ORM\Table(name="ingredients_category")
  */
 class IngredientsCategory

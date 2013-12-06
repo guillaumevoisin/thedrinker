@@ -1,0 +1,12 @@
+security:
+    login:
+        title: Connection
+        username: Username
+        password: Password
+        remember_me: Keep me connected
+        submit: Login
+general:
+    application_name: The Drinker
+    remove: Remove
+    loading_content: Loading content...
+    loading_content_desc: Loading depends on your connection speed!

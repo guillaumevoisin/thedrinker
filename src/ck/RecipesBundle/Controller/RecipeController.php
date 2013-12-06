@@ -98,13 +98,16 @@ class RecipeController extends Controller
     */
     private function createCreateForm(Recipe $entity)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(new RecipeType(), $entity, array(
             'action' => $this->generateUrl('recipe_create'),
             'method' => 'POST',
+            'em'     => $em
         ));
 
         $form->add('submit', 'submit', array(
-            'label' => 'Create',
+            'label' => 'recipes.form.create',
             'attr' => array(
                 'class' => 'buttonS bGreen'
             )
@@ -200,13 +203,16 @@ class RecipeController extends Controller
     */
     private function createEditForm(Recipe $entity)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(new RecipeType(), $entity, array(
             'action' => $this->generateUrl('recipe_update', array('id' => $entity->getId())),
             'method' => 'PUT',
+            'em'     => $em
         ));
 
         $form->add('submit', 'submit', array(
-            'label' => 'Update',
+            'label' => 'recipes.form.update',
             'attr' => array(
                 'class' => 'buttonS bGreen'
             )
@@ -248,7 +254,7 @@ class RecipeController extends Controller
             $em->persist($recipe);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('recipe_show', array('id' => $id)));
+            return $this->redirect($this->generateUrl('recipe_show', array('slug' => $recipe->getSlug())));
         }
 
         return array(

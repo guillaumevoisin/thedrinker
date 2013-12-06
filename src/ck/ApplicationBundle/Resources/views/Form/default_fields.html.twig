@@ -256,12 +256,12 @@
     <div class="formRow {{ attr['class']|default('') }}">
         <div class="input-label">{{ form_label(form) }}</div>
         <div class="input-value">{{ form_widget(form) }}</div>
+        <div class="clear"></div>
         {% if form.vars.errors|length %}
-            <div class="nNote nFailure">
+            <div class="error">
                {{ form_errors(form) }}
             </div>
         {% endif %}
-        <div class="clear"></div>
     </div>
 {% endspaceless %}
 {% endblock form_row %}
@@ -285,7 +285,7 @@
 {% block form_errors %}
 {% spaceless %}
     {% if errors|length > 0 %}
-    <ul class="nNote nFailure form_errors">
+    <ul class="form_errors">
         {% for error in errors %}
             <li>{{
                 error.messagePluralization is null

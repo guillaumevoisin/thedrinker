@@ -3,6 +3,6 @@
 
 {% block body -%}
 
-	{% include 'ckRecipesBundle:Recipe:recipeForm.html.twig' with { 'title': 'Recipe creation', 'form': form, 'mode': 'new' } %}
+	{% include 'ckRecipesBundle:Recipe:recipeForm.html.twig' with { 'title': 'recipes.form.add'|trans, 'form': form, 'mode': 'new' } %}
 
 {% endblock %}

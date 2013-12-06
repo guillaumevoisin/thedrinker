@@ -1,0 +1,4 @@
+recipes: 
+    type: rest
+    resource: "ckRecipesBundle:RecipeRest"
+    name_prefix: api_

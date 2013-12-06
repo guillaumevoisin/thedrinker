@@ -26,12 +26,12 @@
 
     				<div class="ingredient-form">
     					{{ form_widget(ingredient) }}
-    					<p class="remove-row"><a href="#" class="buttonS bRed">Remove</a></p>
+    					<p class="remove-row"><a href="#" class="buttonS bRed">{% trans %}general.remove{% endtrans %}</a></p>
     				</div>
 
     			{% endmacro %}
 
-    			<h5>Ingredients</h5>
+    			<h5>{% trans %}recipes.ingredients{% endtrans %}</h5>
 
     			<ul id="ingredients-fields-list" class="nested-row" data-prototype="{{ form_widget(form.ingredients.vars.prototype) | e }}">
     			{% for ingredient in form.ingredients %}
@@ -48,6 +48,8 @@
                 {{ form_row(form.creator) }}
                 {{ form_row(form.garnish) }}
                 {{ form_row(form.difficulty) }}
+                {{ form_row(form.categories) }}
+                {{ form_row(form.tags) }}
 
             {% endif %}
 

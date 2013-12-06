@@ -22,7 +22,11 @@
         "stof/doctrine-extensions-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "knplabs/knp-menu-bundle":"1.1.*",
-        "liip/imagine-bundle": "dev-master"
+        "liip/imagine-bundle": "dev-master",
+        "friendsofsymfony/rest-bundle": "1.0.*",
+        "jms/serializer-bundle": "0.12",
+        "willdurand/expose-translation-bundle": "master@dev",
+        "friendsofsymfony/jsrouting-bundle": "~1.1"
     },
     "scripts": {
         "post-install-cmd": [

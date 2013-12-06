@@ -3,6 +3,7 @@
 namespace ck\RecipesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -243,5 +244,71 @@ class IngredientsCategoryController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists Ingredients categories entities for autocomplete fields.
+     *
+     * @Route("/ingredients_categories_autocomplete", name="ingredients_categories_aucomplete", options={"expose"=true})
+     */
+    public function ingredientsCategoriesAutoCompleteAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $term = $request->request->get('q');
+        $page = $request->request->get('page');
+        $nb_results = $request->request->get('page_limit');
+
+        $ingredientsCategories = $em->getRepository('ckRecipesBundle:IngredientsCategory')->findLikeName($term, $page, $nb_results);
+        $total_results = $em->getRepository('ckRecipesBundle:IngredientsCategory')->getNbResults($term);
+
+        $ingredientsCategoriesList = array();
+
+        if($ingredientsCategories)
+        {
+            foreach ($ingredientsCategories as $ingredientsCategory)
+            {
+                $ingredientsCategoriesList[] = array(
+                    'id'          => $ingredientsCategory->getId(),
+                    'title'       => $ingredientsCategory->getName()
+                );
+            }
+        }
+
+        $response = new Response(json_encode(array('items' => $ingredientsCategoriesList, 'total' => $total_results)));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    /**
+     * Retrieve an Ingredient Category entity
+     *
+     * @Route("/{ids}", name="ingredients_categories_get", options={"expose"=true})
+     */
+    public function getAction(Request $request, $ids)
+    {
+        $ingredientsCategories_ids = array($ids);
+
+        if(preg_match("/,/", $ids))
+            $ingredientsCategories_ids = explode(",", $ids);
+
+        $em = $this->getDoctrine()->getManager();
+        $ingredientsCategories = $em->getRepository('ckRecipesBundle:IngredientsCategory')->findBy( array('id' => $ingredientsCategories_ids) );
+
+        if(!$ingredientsCategories)
+            throw new v3dException($this->get('translator')->trans( 'ingredientsCategories #' . $ids . ' can\'t be found' ));
+
+        $ingredientsCategoryList = array();
+
+        foreach ($ingredientsCategories as $ingredientsCategory)
+        {
+            $ingredientsCategoryList[] = array(
+                'id'          => $ingredientsCategory->getId(),
+                'title'       => $ingredientsCategory->getName()
+            );
+        }
+
+        return new Response(json_encode($ingredientsCategoryList));
     }
 }
