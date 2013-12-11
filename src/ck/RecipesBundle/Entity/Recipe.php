@@ -55,7 +55,7 @@ class Recipe
     private $updated;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @Expose
      */
     protected $description;

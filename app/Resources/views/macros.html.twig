@@ -1,5 +1,5 @@
 {# Macro used for building forms (create and update) #}
-{% macro form(title, form) %}
+{% macro form(title, form, delete_form) %}
 	<div class="inner-content">
 
 		<h1>{{ title }}</h1>
@@ -9,6 +9,12 @@
 			<div class="up-triangle"></div>
 			
 			{{ form(form) }}
+
+			{% if delete_form %}
+				<div class="delete">
+					{{ form(delete_form) }}
+				</div>
+			{% endif %}
 		
 		</div>
 

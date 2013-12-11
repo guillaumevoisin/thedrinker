@@ -8,12 +8,29 @@ recipes:
         name: Name
         description: Description
         file: Picture
-        glassType: Type of glass
-        preparationType: Preparation
+        glassType:
+            title: Type of glass
+            tumbler: Tumbler
+            martini: Martini
+            oldFashioned: Old fashioned
+            champagne: Champagne
+            margarita: Margarita
+            highball: Highball
+            hurricane: Hurricane
+            wine: Wine
+        preparationType:
+            title: Preparation
+            shaker: Shaker
+            blender: Blender
+            stirred: Stirred
         whereToDrink: Where to drink
         creator: Creator
         garnish: Garnish
-        difficulty: Difficulty
+        difficulty:
+            title: Difficulty
+            easy: Easy
+            moderate: Moderate
+            hard: Hard
         categories: Categories
         tags: Tags
         ingredients:
@@ -31,4 +48,5 @@ ingredients:
         alcoholVolume: Alcohol volume
         age: Age
         categories: Categories
+        searchfor: Search categories
 

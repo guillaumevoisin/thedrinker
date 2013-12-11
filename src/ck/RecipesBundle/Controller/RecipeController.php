@@ -36,10 +36,10 @@ class RecipeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ckRecipesBundle:Recipe')->findAll();
+        $recipes = $em->getRepository('ckRecipesBundle:Recipe')->findAll();
 
         return array(
-            'entities' => $entities,
+            'recipes' => $recipes,
         );
     }
     /**
@@ -309,7 +309,12 @@ class RecipeController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('recipe_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Delete',
+                'attr' => array(
+                    'class' => 'buttonS bRed'
+                )
+            ))
             ->getForm()
         ;
     }

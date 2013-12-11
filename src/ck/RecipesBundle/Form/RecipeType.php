@@ -35,28 +35,28 @@ class RecipeType extends AbstractType
             ))
             ->add('glassType', 'choice', array(
                 'expanded' => false,
-                'label'    => 'recipes.form.glassType',
+                'label'    => 'recipes.form.glassType.title',
                 'required' => false,
                 'choices' => array(
-                    'tumbler'       => 'Tumbler',
-                    'martini'       => 'Martini',
-                    'old-fashioned' => 'Old fashioned',
-                    'champagne'     => 'Champagne',
-                    'Margarita'     => 'Margarita',
-                    'highball'      => 'Highball',
-                    'hurricane'     => 'Hurricane',
-                    'wine'          => 'Wine'
+                    'tumbler'       => 'recipes.form.glassType.tumbler',
+                    'martini'       => 'recipes.form.glassType.martini',
+                    'old-fashioned' => 'recipes.form.glassType.oldFashioned',
+                    'champagne'     => 'recipes.form.glassType.champagne',
+                    'Margarita'     => 'recipes.form.glassType.margarita',
+                    'highball'      => 'recipes.form.glassType.highball',
+                    'hurricane'     => 'recipes.form.glassType.hurricane',
+                    'wine'          => 'recipes.form.glassType.wine'
                 )
             ))
             ->add('preparationType', 'choice', array(
                 'expanded'    => true,
-                'label'       => 'recipes.form.preparationType',
+                'label'       => 'recipes.form.preparationType.title',
                 'required'    => false,
                 'empty_value' => false,
                 'choices' => array(
-                    'shaker'  => 'Shaker',
-                    'blender' => 'Blender',
-                    'stirred' => 'Stirred',
+                    'shaker'  => 'recipes.form.preparationType.shaker',
+                    'blender' => 'recipes.form.preparationType.blender',
+                    'stirred' => 'recipes.form.preparationType.stirred',
                 )
             ))
             ->add('whereToDrink', 'text', array(
@@ -83,11 +83,11 @@ class RecipeType extends AbstractType
                 'expanded'    => true,
                 'required'    => false,
                 'empty_value' => false,
-                'label'       => 'recipes.form.difficulty',
+                'label'       => 'recipes.form.difficulty.title',
                 'choices' => array(
-                    'easy'     => 'easy',
-                    'moderate' => 'moderate',
-                    'hard'     => 'hard',
+                    'easy'     => 'recipes.form.difficulty.easy',
+                    'moderate' => 'recipes.form.difficulty.moderate',
+                    'hard'     => 'recipes.form.difficulty.hard',
                 )
             ));
 

@@ -106,7 +106,7 @@ h5{	font-weight:800; font-family:'Open Sans', sans-serif!important;}
 }
 
 .menu-item ul{ margin-bottom: 0 }
-.menu-item li{ list-style: none }
+.menu-item li{ list-style: none; margin-bottom: 0 }
 
 .closer-icon{		background-image:url(../images/icon_shadow/misc/accessdenied.png); background-position:0 13px;}
 .home-icon{			background-image:url(../images/icon_shadow/misc/home.png);		background-position:0 13px;}

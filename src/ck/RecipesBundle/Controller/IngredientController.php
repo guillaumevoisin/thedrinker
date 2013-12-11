@@ -258,7 +258,12 @@ class IngredientController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('ingredient_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Delete',
+                'attr' => array(
+                    'class' => 'buttonS bRed'
+                )
+            ))
             ->getForm()
         ;
     }

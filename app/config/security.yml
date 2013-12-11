@@ -18,6 +18,7 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            http_basic: ~
 
         secured_area:
             pattern:    ^/admin

@@ -14,7 +14,7 @@ use ck\RecipesBundle\Form\IngredientsCategoryType;
 /**
  * IngredientsCategory controller.
  *
- * @Route("/ingredientscategory")
+ * @Route("/")
  */
 class IngredientsCategoryController extends Controller
 {
@@ -22,7 +22,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Lists all IngredientsCategory entities.
      *
-     * @Route("/", name="ingredientscategory")
+     * @Route("/ingredientscategories", name="ingredientscategory")
      * @Method("GET")
      * @Template()
      */
@@ -39,7 +39,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Creates a new IngredientsCategory entity.
      *
-     * @Route("/", name="ingredientscategory_create")
+     * @Route("/admin/ingredientscategory", name="ingredientscategory_create")
      * @Method("POST")
      * @Template("ckRecipesBundle:IngredientsCategory:new.html.twig")
      */
@@ -77,7 +77,12 @@ class IngredientsCategoryController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Create',
+            'attr' => array(
+                'class' => 'buttonS bGreen'
+            )
+        ));
 
         return $form;
     }
@@ -85,7 +90,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Displays a form to create a new IngredientsCategory entity.
      *
-     * @Route("/new", name="ingredientscategory_new")
+     * @Route("/ingredientscategory/new", name="ingredientscategory_new")
      * @Method("GET")
      * @Template()
      */
@@ -103,7 +108,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Finds and displays a IngredientsCategory entity.
      *
-     * @Route("/{id}", name="ingredientscategory_show")
+     * @Route("/ingredientscategory/{id}", name="ingredientscategory_show")
      * @Method("GET")
      * @Template()
      */
@@ -128,7 +133,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Displays a form to edit an existing IngredientsCategory entity.
      *
-     * @Route("/{id}/edit", name="ingredientscategory_edit")
+     * @Route("/admin/ingredientscategory/{id}/edit", name="ingredientscategory_edit")
      * @Method("GET")
      * @Template()
      */
@@ -166,14 +171,19 @@ class IngredientsCategoryController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Update',
+            'attr' => array(
+                'class' => 'buttonS bGreen'
+            )
+        ));
 
         return $form;
     }
     /**
      * Edits an existing IngredientsCategory entity.
      *
-     * @Route("/{id}", name="ingredientscategory_update")
+     * @Route("/ingredientscategory/{id}", name="ingredientscategory_update")
      * @Method("PUT")
      * @Template("ckRecipesBundle:IngredientsCategory:edit.html.twig")
      */
@@ -206,7 +216,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Deletes a IngredientsCategory entity.
      *
-     * @Route("/{id}", name="ingredientscategory_delete")
+     * @Route("/ingredientscategory/{id}", name="ingredientscategory_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -241,7 +251,12 @@ class IngredientsCategoryController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('ingredientscategory_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Delete',
+                'attr' => array(
+                    'class' => 'buttonS bRed'
+                )
+            ))
             ->getForm()
         ;
     }
@@ -297,7 +312,7 @@ class IngredientsCategoryController extends Controller
         $ingredientsCategories = $em->getRepository('ckRecipesBundle:IngredientsCategory')->findBy( array('id' => $ingredientsCategories_ids) );
 
         if(!$ingredientsCategories)
-            throw new v3dException($this->get('translator')->trans( 'ingredientsCategories #' . $ids . ' can\'t be found' ));
+            throw new \Exception($this->get('translator')->trans( 'ingredientsCategories #' . $ids . ' can\'t be found' ));
 
         $ingredientsCategoryList = array();
 

@@ -16,8 +16,6 @@
 
             {{ form_row(form.description) }}
 
-            {{ form_row(form.submit) }}
-
             {% if mode != 'new' %}
     
     			{% macro prototype(ingredient, itemNum) %}
@@ -53,9 +51,16 @@
 
             {% endif %}
 
+            {{ form_row(form.submit) }}
 			{{ form_widget(form._token) }}
 
 		{{ form_end(form, {'render_rest': false}) }}
+
+        {% if delete_form %}
+            <div class="delete">
+                {{ form(delete_form) }}
+            </div>
+        {% endif %}
 	
 	</div>
 

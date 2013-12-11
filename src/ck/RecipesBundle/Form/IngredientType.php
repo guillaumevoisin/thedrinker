@@ -41,7 +41,8 @@ class IngredientType extends AbstractType
                 'required' => false
             ))
             ->add('age', 'text', array(
-                'label' => 'ingredients.form.age'
+                'label'    => 'ingredients.form.age',
+                'required' => false
             ))
         ;
 
@@ -53,7 +54,7 @@ class IngredientType extends AbstractType
                     'class'               => 'ajax-select',
                     'style'               => 'width:100%',
                     'data-multiple'       => true,
-                    'data-pholder'        => 'users.searchfor',
+                    'data-pholder'        => 'ingredients.form.searchfor',
                     'data-ajax-route'     => 'ingredients_categories_aucomplete',
                     'data-ajax-route-get' => 'ingredients_categories_get'
                 ),

@@ -39,7 +39,7 @@ class Ingredient
     protected $volume;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      * @Assert\Range(
      *      min = 0,
      *      max = 80,
