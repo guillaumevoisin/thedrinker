@@ -1,0 +1,53 @@
+{% import '::macros.html.twig' as macros %}
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+
+        <div class="swiper-slide"> 
+            
+            <figure class="cocktail-img">
+                <a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}"><img src="{{ asset(recipe.getWebPath) | imagine_filter('cocktail_view') }}"/></a>
+                <h2><a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}">{{ recipe.name }}</a></h2>
+            </figure>
+
+        </div>
+
+        <div class="swiper-slide recipe-info">
+            
+            <h2><a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}">{{ recipe.name }}</a></h2>
+
+            <section class="cocktail-ingredients">
+
+                <h4>{% trans %}ingredients.title{% endtrans %}</h4>
+
+                <ul>
+                {% for ing in recipe.ingredients %}
+
+                    <li class="ingredient">
+                        <div class="info">
+                            <span class="proportion">{{ ing.proportion }}</span> <span class="unit">{{ ing.unit }}</span> <span class="ingredient-name">{{ ing.ingredient }}</span></h4>
+                        </div>
+                    </li>
+
+                {% endfor %}
+                </ul>
+            </section>
+
+            {{ macros.shareButtons(recipe) }}
+
+        </div>
+
+        <div class="swiper-slide recipe-story">
+
+            <h2><a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}">{{ recipe.name }}</a></h2>
+
+            <section class="description">
+                <p>{{ recipe.description }}</p>
+            </section>
+
+            {{ macros.shareButtons(recipe) }}
+
+        </div>
+
+    </div>
+</div>

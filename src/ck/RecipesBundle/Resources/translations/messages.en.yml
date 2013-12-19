@@ -41,6 +41,7 @@ recipes:
     ingredients: Ingredients
 
 ingredients:
+    title: Ingredients
     form:
         name: Name
         description: Description

@@ -6,3 +6,15 @@ ck\UsersBundle\Entity\User:
             type: integer
             generator:
                 strategy: AUTO
+    manyToMany:
+        favoriteRecipes:
+            targetEntity: ck\RecipesBundle\Entity\Recipe
+            inversedBy: users
+            joinTable:
+                name: bind_users_favorite_recipes
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    recipe_id:
+                        referencedColumnName: id

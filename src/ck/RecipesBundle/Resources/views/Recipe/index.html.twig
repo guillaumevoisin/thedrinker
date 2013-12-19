@@ -9,10 +9,7 @@
 
             <li class="recipe-entry td-wrap td-show">
 
-                <figure class="cocktail-img">
-                    <a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}"><img src="{{ asset(recipe.getWebPath) | imagine_filter('cocktail_view') }}"/></a>
-                    <h2><a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}">{{ recipe.name }}</a></h2>
-                </figure>
+                {% include 'ckRecipesBundle:Recipe:recipeShow.html.twig' with {'recipe': recipe} %}
 
             </li>
 

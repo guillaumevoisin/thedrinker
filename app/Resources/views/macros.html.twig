@@ -21,8 +21,28 @@
 	</div>
 {% endmacro %}
 
+{# Macro used for icon-based link #}
 {% macro addItem(id, icon, link) %}
 	<p class="add-item">
 		<a href="{{ link }}" id="{{ id }}" class="buttonS"><img src="{{ asset('bundles/theme/images/icon/' ~ icon) }}" /></a>
 	</p>
+{% endmacro %}
+
+{# Macro used for share buttons #}
+{% macro shareButtons(recipe) %}
+<div class="actions-buttons" data-recipe-id="{{ recipe.id }}">
+                
+    <div class="action like{% if recipe in app.user.favoriteRecipes %} active{% endif %}">
+        <a href="#"><span></span></a>
+    </div>
+
+    <div class="action share">
+        <a href="#"><span></span></a>
+    </div>
+
+    <div class="action comment">
+        <a href="#"><span></span></a>
+    </div>
+
+</div>
 {% endmacro %}

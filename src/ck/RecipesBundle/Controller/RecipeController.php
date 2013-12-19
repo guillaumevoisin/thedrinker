@@ -3,6 +3,7 @@
 namespace ck\RecipesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -317,5 +318,40 @@ class RecipeController extends Controller
             ))
             ->getForm()
         ;
+    }
+
+    /**
+     * Set a recipe as favorite
+     *
+     * @Route("/recipes/{id}/favorite", name="recipe_favorite", options={"expose"=true})
+     * @Method("POST")
+     */
+    public function setFavorite($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+
+        if(!$recipe)
+            throw $this->createNotFoundException('Unable to find recipe #' . $id);
+
+        // Get current user
+        $securityContext = $this->get('security.context');
+
+        if(!$securityContext->getToken())
+            throw new Exception("You have to be connected to mark a recipe as favorite");
+
+        $user = $securityContext->getToken()->getUser();
+
+        if(!$user->getFavoriteRecipes()->contains($recipe))
+            $user->addFavoriteRecipe($recipe);
+        else
+            $user->removeFavoriteRecipe($recipe);
+        
+        $em->persist($user);
+        $em->flush();
+
+        return new Response(json_encode(array('result' => 'success')));
+
     }
 }

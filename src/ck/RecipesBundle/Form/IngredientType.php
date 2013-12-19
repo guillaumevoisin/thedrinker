@@ -30,6 +30,7 @@ class IngredientType extends AbstractType
                 'label' => 'ingredients.form.volume',
                 'expanded' => true,
                 'choices'  => array(
+                    '0'  => 'N/A',
                     '20'  => '20 cl',
                     '50'  => '50 cl',
                     '70'  => '70 cl',

@@ -160,6 +160,11 @@ class Recipe
     private $contentChangedBy;
 
     /**
+     * @ORM\ManyToMany(targetEntity="ck\UsersBundle\Entity\User", mappedBy="favoriteRecipes")
+     */
+    private $users;
+
+    /**
      * Get id
      *
      * @return integer 

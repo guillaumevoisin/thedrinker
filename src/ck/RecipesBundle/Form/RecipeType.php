@@ -19,6 +19,11 @@ class RecipeType extends AbstractType
     {
         $entityManager = $options['em'];
 
+        $recipe = null;
+
+        if(!empty($options['data']))
+            $recipe = $options['data'];
+
         $builder
             ->add('name', 'text', array(
                 'attr' => array(
@@ -73,7 +78,7 @@ class RecipeType extends AbstractType
             ))
             ->add('ingredients', 'collection', array(
                     'label' => 'recipes.form.ingredients',
-                    'type'         => new RecipesIngredientsType(),
+                    'type'         => new RecipesIngredientsType($recipe),
                     'allow_add'    => true,
                     'allow_delete' => true,
                     'prototype'    => true,
@@ -99,7 +104,7 @@ class RecipeType extends AbstractType
                         'class'               => 'ajax-select',
                         'style'               => 'width:100%',
                         'data-multiple'       => true,
-                        'data-pholder'        => 'users.searchfor',
+                        'data-pholder'        => 'ingredients.form.searchfor',
                         'data-ajax-route'     => 'recipes_categories_aucomplete',
                         'data-ajax-route-get' => 'recipes_categories_get'
                     ),
@@ -115,7 +120,7 @@ class RecipeType extends AbstractType
                         'class'               => 'ajax-select',
                         'style'               => 'width:100%',
                         'data-multiple'       => true,
-                        'data-pholder'        => 'users.searchfor',
+                        'data-pholder'        => 'ingredients.form.searchfor',
                         'data-ajax-route'     => 'recipes_tags_aucomplete',
                         'data-ajax-route-get' => 'recipes_tags_get',
                         'data-tags'           => true

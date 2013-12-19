@@ -3,11 +3,6 @@ $(document).ready(function() {
 	// Select2
 	$("select:not('.tags')").width("100%").select2();
 
-	// Tags
-	/*$("select.tags").each(function(){
-		$(this).select2();
-	})*/
-
 	// Ajax selects
 	$("input.ajax-select:not('.ajax-select-initialized')").each(function(){//:not selecting the ones already initialized
 
@@ -73,7 +68,30 @@ $(document).ready(function() {
 
 	// Uniform
 	$(":checkbox, :radio").uniform();
+
+	// Swipes
 	
+	$(".swiper-container").each(function(){
+		$(this).swiper({
+			mode:'horizontal',
+			calculateHeight: true,
+			grabCursor: true
+		});
+	});	
+
+	// Share
+	
+	$(".actions-buttons .like a").click(function(){
+
+		var recipeId = $(this).parents(".actions-buttons").data("recipe-id");
+
+		$.post(Routing.generate('recipe_favorite', { id: recipeId }), null, function(data, textStatus, xhr) {
+			console.log(data.result);
+		}, 'json');
+
+		return false;
+
+	})
 });
 
 function formatSelection(item)

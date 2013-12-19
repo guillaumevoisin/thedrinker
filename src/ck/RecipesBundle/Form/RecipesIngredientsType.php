@@ -12,6 +12,14 @@ class RecipesIngredientsType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
+    
+    private $recipe;
+
+    public function __construct($recipe)
+    {
+        $this->recipe = $recipe;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -19,7 +27,8 @@ class RecipesIngredientsType extends AbstractType
                 'class' => 'ckRecipesBundle:Recipe',
                 'attr' => array(
                     'class' => 'display-none'
-                )
+                ),
+                'data' => ($this->recipe != null) ? $this->recipe : null
             ))
             ->add('ingredient', 'entity', array(
                 'class' => 'ckRecipesBundle:Ingredient',

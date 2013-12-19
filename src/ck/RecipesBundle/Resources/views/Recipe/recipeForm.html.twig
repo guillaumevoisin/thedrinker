@@ -95,7 +95,7 @@
             return false;
         });
 
-        jQuery('#ingredients-fields-list').on('click', '.remove-row', function(){
+        jQuery('#ingredients-fields-list').on('click', '.remove-row a', function(){
         	$(this).parents("li").remove();
 
         	jQuery('#ingredients-fields-list li').each(function(i, elt){

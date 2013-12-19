@@ -299,7 +299,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Retrieve an Ingredient Category entity
      *
-     * @Route("/{ids}", name="ingredients_categories_get", options={"expose"=true})
+     * @Route("/ingredients/{ids}", name="ingredients_categories_get", options={"expose"=true})
      */
     public function getAction(Request $request, $ids)
     {

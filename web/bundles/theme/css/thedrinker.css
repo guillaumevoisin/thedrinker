@@ -2,7 +2,7 @@
 
 .inner-content{ max-width: 600px; margin: auto;  }
 .inner-content h1{ margin-bottom: 1em; color: #777; text-shadow: 1px 1px #fff; }
-h2.logo{ text-align: center; font-family: Great Vibes; font-size: 30px }
+h2.logo{ text-align: center; font-family: Great Vibes; font-size: 30px; font-weight: normal; }
 
 /** Select2 dropdown **/
 
@@ -66,7 +66,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
  }
 .actions-buttons .action:first-child{ border-left: none; border-bottom-left-radius: 5px }
 .actions-buttons .action:last-child{ border-right: none; border-bottom-right-radius: 5px }
-.actions-buttons .action a{ display: block; font-size: 16px; color:#888; padding: 15px 0; text-shadow:1px 1px #fff; text-align: center; }
+.actions-buttons .action a{ display: block; font-size: 16px; color:#888; padding: 15px 0; text-shadow:1px 1px #fff; text-align: center }
+.actions-buttons .action a span{ width: 30px; height:30px; background: url(../images/icon/recipe/actions.png) no-repeat; display: inline-block; }
+.actions-buttons .action a:hover span{ background-position-y: -30px; }
+.actions-buttons .action a:active span, .actions-buttons .action.active a span{ background-position-y: -60px; }
+.actions-buttons .action.like span{ background-position: -30px 0 }
+.actions-buttons .action.share span{ background-position: -60px 0 }
+.actions-buttons .action.comment span{}
 .actions-buttons .action a img{ display: inline }
 
 /** Recipes **/
@@ -90,13 +96,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .cocktail-desc p{ font-family: Lato; font-size: 16px; text-align: justify; margin-bottom: 0; }
 
 .cocktail-ingredients ul{ margin: 0; padding: 0; }
-.cocktail-ingredients .ingredient{ border-bottom:1px solid #A4BE91; border-top:1px solid #BFDDA9; list-style: none; padding: 1em 0; margin-bottom: 0; background: #ADC999 }
+.cocktail-ingredients .ingredient{ list-style: none; margin-bottom: 0.5em }
 .cocktail-ingredients .ingredient:last-child{ border-bottom: none }
-.cocktail-ingredients .ingredient .number{ float: left; width:13%; text-align: center; font-size: 24px; color:#fff; font-family: Great Vibes }
-.cocktail-ingredients .ingredient .info{ float: left; width:87%; }
-.cocktail-ingredients .ingredient .info span{ margin: 0; padding: 0; font-family: Open Sans; float: left; font-size: 16px }
-.cocktail-ingredients .ingredient .info span.proportion{ width:20%; color:#666; }
-.cocktail-ingredients .ingredient .info span.ingredient-name{ color:#fff }
+.cocktail-ingredients .ingredient .info span{ margin: 0; padding: 0; font-family: Open Sans; font-size: 16px; margin-right: 5px }
+.cocktail-ingredients .ingredient .info span.proportion{ color:#444; font-weight: bold }
 
 /* Recipes list */
 
@@ -105,6 +108,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .recipe-entry figure img{ display: block }
 .recipe-entry figure h2{ position: absolute; bottom: 0; left:0; right:0; background: rgba(0,0,0,0.5); padding: 0; margin: 0; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px }
 .recipe-entry figure h2 a{ color:#fff; padding: 10px; display: block; }
+
+.recipe-entry .recipe-info, .recipe-entry .recipe-story{ background:#fff; border-radius:5px; padding-bottom: 65px }
+.recipe-entry h2{ font-size: 36px; text-align: center; margin-top: 0.5em; padding: 0; margin-bottom: 0; font-weight: normal }
+.recipe-entry h2 a{ font-family: Great Vibes; }
+.recipe-entry .recipe-info .description{ padding: 30px; }
+.recipe-entry .recipe-info .description p{ font-size: 16px; font-family: 'Open Sans'; text-align: justify; line-height: 1.4em; margin-bottom: 0 }
+.recipe-entry .actions-buttons{ position: absolute; bottom: 0; left: 0; right: 0; border-top:1px solid #eee; }
+
+.recipe-entry .cocktail-ingredients{ padding: 15px 30px; }
+.recipe-entry .recipe-info h4{ font-family: 'Open Sans'; text-transform: uppercase; font-size: 14px; margin-bottom: .7em }
+
+.recipe-entry .recipe-story .description{ padding: 30px; }
 
 /**	Desktop **/
 @media (min-width: 700px) and (orientation: landscape)
