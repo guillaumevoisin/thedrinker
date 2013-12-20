@@ -16,7 +16,9 @@ use Symfony\Component\Security\Acl\Domain\RoleSecurityIdentity;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 use ck\RecipesBundle\Entity\Recipe;
+use ck\RecipesBundle\Entity\RecipesComment;
 use ck\RecipesBundle\Form\RecipeType;
+use ck\RecipesBundle\Form\RecipesCommentType;
 
 /**
  * Recipe controller.
@@ -338,20 +340,211 @@ class RecipeController extends Controller
         // Get current user
         $securityContext = $this->get('security.context');
 
-        if(!$securityContext->getToken())
-            throw new Exception("You have to be connected to mark a recipe as favorite");
+        if(!$securityContext->isGranted('IS_AUTHENTICATED_FULLY'))
+            $response = array(
+                'result' => 'error',
+                'msg' => 'You have to be connected to mark a recipe as favorite'
+            );
+        else
+        {
+            $user = $securityContext->getToken()->getUser();
 
+            try{
+                if(!$user->getFavoriteRecipes()->contains($recipe))
+                    $user->addFavoriteRecipe($recipe);
+                else
+                    $user->removeFavoriteRecipe($recipe);
+                
+                $em->persist($user);
+                $em->flush();
+
+                $response = array(
+                    'result' => 'success',
+                    'msg' => 'Recipe marked as favorite'
+                );
+            }
+            catch(Exception $e)
+            {
+                $response = array(
+                    'result' => 'error',
+                    'msg' => $e->getMessage()
+                );
+            }
+        }
+
+        return new Response(json_encode($response));
+
+    }
+
+    /**
+     * Like a recipe
+     *
+     * @Route("/recipes/{id}/like", name="recipe_like", options={"expose"=true})
+     * @Method("POST")
+     */
+    public function setLike($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+
+        if(!$recipe)
+            throw $this->createNotFoundException('Unable to find recipe #' . $id);
+
+        // Get current user
+        $securityContext = $this->get('security.context');
+
+        if(!$securityContext->isGranted('IS_AUTHENTICATED_FULLY'))
+            $response = array(
+                'result' => 'error',
+                'msg' => 'You have to be connected to like a recipe'
+            );
+        else
+        {
+            $user = $securityContext->getToken()->getUser();
+
+            try{
+                if(!$user->getLikes()->contains($recipe))
+                    $user->addLike($recipe);
+                else
+                    $user->removeLike($recipe);
+                
+                $em->persist($user);
+                $em->flush();
+
+                $response = array(
+                    'result' => 'success',
+                    'msg' => 'Recipe liked'
+                );
+            }
+            catch(Exception $e)
+            {
+                $response = array(
+                    'result' => 'error',
+                    'msg' => $e->getMessage()
+                );
+            }
+        }
+
+        return new Response(json_encode($response));
+
+    }
+
+    /**
+     * Displays a form to create a new Recipe comment.
+     *
+     * @Route("/recipes/{id}/comments/new", name="recipe_comment_new")
+     * @Method("GET")
+     * @Template("ckRecipesBundle:RecipesComment:new.html.twig")
+     */
+    public function commentNewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // Get current user
+        $securityContext = $this->get('security.context');
+
+        if(!$securityContext->isGranted('IS_AUTHENTICATED_FULLY'))
+            throw new AccessDeniedException();
+
+        $entity = new RecipesComment();
         $user = $securityContext->getToken()->getUser();
 
-        if(!$user->getFavoriteRecipes()->contains($recipe))
-            $user->addFavoriteRecipe($recipe);
-        else
-            $user->removeFavoriteRecipe($recipe);
+        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+
+        if(!$recipe)
+            throw $this->createNotFoundException('Unable to find recipe #' . $id);
         
-        $em->persist($user);
-        $em->flush();
+        $form = $this->createForm(new RecipesCommentType($user, $recipe), $entity, array(
+            'action' => $this->generateUrl('recipe_comment_create', array('id' => $id)),
+            'method' => 'POST'
+        ));
 
-        return new Response(json_encode(array('result' => 'success')));
+        $form->add('submit', 'submit', array(
+            'label' => 'recipes.comments.form.create',
+            'attr' => array(
+                'class' => 'buttonS bGreen'
+            )
+        ));
 
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
+    }
+
+    /**
+     * Creates a new Recipe entity.
+     *
+     * @Route("/recipes/{id}/comments", name="recipe_comment_create")
+     * @Method("POST")
+     * @Template("ckRecipesBundle:Recipe:show.html.twig")
+     */
+    public function commentCreateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $securityContext = $this->get('security.context');
+
+        if(!$securityContext->isGranted('IS_AUTHENTICATED_FULLY'))
+            throw new AccessDeniedException();
+
+        $entity = new RecipesComment();
+        $user = $securityContext->getToken()->getUser();
+
+        $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
+
+        if(!$recipe)
+            throw $this->createNotFoundException('Unable to find recipe #' . $id);
+        
+        $form = $this->createForm(new RecipesCommentType($user, $recipe), $entity, array(
+            'action' => $this->generateUrl('recipe_comment_create', array('id' => $id)),
+            'method' => 'POST'
+        ));
+
+        $form->add('submit', 'submit', array(
+            'label' => 'recipes.comments.form.create',
+            'attr' => array(
+                'class' => 'buttonS bGreen'
+            )
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            
+            $em->persist($entity);
+            $em->flush();
+
+            /*// ACL Creation
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($recipe);
+            $acl = $aclProvider->createAcl($objectIdentity);
+
+            // Get current user
+            $securityContext = $this->get('security.context');
+            $user = $securityContext->getToken()->getUser();
+
+            $userSecurityIdentity = UserSecurityIdentity::fromAccount($user);
+            $roleSecurityIdentity = new RoleSecurityIdentity('ROLE_SUPER_ADMIN');
+
+            // Give access to owner
+            $acl->insertObjectAce($userSecurityIdentity, MaskBuilder::MASK_OWNER);
+
+            // Give access to super admin
+            $acl->insertObjectAce($roleSecurityIdentity, MaskBuilder::MASK_MASTER);
+            
+            $aclProvider->updateAcl($acl);*/
+
+            return $this->redirect($this->generateUrl('recipe_show', array('slug' => $recipe->getSlug())));
+        }
+        print_r($form->getErrors());exit;
+        $deleteForm = $this->createDeleteForm($recipe->getId());
+
+        return array(
+            'recipe'      => $recipe,
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
     }
 }

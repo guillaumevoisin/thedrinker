@@ -162,7 +162,18 @@ class Recipe
     /**
      * @ORM\ManyToMany(targetEntity="ck\UsersBundle\Entity\User", mappedBy="favoriteRecipes")
      */
-    private $users;
+    private $usersFavorites;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="ck\UsersBundle\Entity\User", mappedBy="likes")
+     * */
+    private $usersLikes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="RecipesComment", mappedBy="recipe")
+     * */
+    private $comments;
+
 
     /**
      * Get id
@@ -204,6 +215,8 @@ class Recipe
         $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->usersLikes = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -516,9 +529,9 @@ class Recipe
      * @param \ck\RecipesBundle\Entity\RecipesTag $tags
      * @return Recipe
      */
-    public function addTag(\ck\RecipesBundle\Entity\RecipesTag $tags)
+    public function addTag(\ck\RecipesBundle\Entity\RecipesTag $tag)
     {
-        $this->tags[] = $tags;
+        $this->tags[] = $tag;
     
         return $this;
     }
@@ -528,9 +541,9 @@ class Recipe
      *
      * @param \ck\RecipesBundle\Entity\RecipesTag $tags
      */
-    public function removeTag(\ck\RecipesBundle\Entity\RecipesTag $tags)
+    public function removeTag(\ck\RecipesBundle\Entity\RecipesTag $tag)
     {
-        $this->tags->removeElement($tags);
+        $this->tags->removeElement($tag);
     }
 
     /**
@@ -549,6 +562,65 @@ class Recipe
     public function setTags($tags)
     {
         $this->tags = $tags;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \ck\RecipesBundle\Entity\RecipesComment $comments
+     * @return Recipe
+     */
+    public function addComment(\ck\RecipesBundle\Entity\RecipesComment $comment)
+    {
+        $this->comments[] = $comment;
+    
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \ck\RecipesBundle\Entity\RecipesComment $comment
+     */
+    public function removeComment(\ck\RecipesBundle\Entity\RecipesComment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Set comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * Get usersLikes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLikes()
+    {
+        return $this->usersLikes;
+    }
+
+    /**
+     * Set usersLikes
+     */
+    public function setLikes($likes)
+    {
+        $this->usersLikes = $likes;
     }
 
     /**

@@ -81,7 +81,7 @@ $(document).ready(function() {
 
 	// Share
 	
-	$(".actions-buttons .like a").click(function(){
+	$(".actions-buttons .favorite:not(.disabled) a").click(function(){
 
 		var recipeId = $(this).parents(".actions-buttons").data("recipe-id");
 
@@ -90,8 +90,27 @@ $(document).ready(function() {
 		}, 'json');
 
 		return false;
-
 	})
+
+	$(".actions-buttons .like:not(.disabled) a").click(function(){
+
+		var recipeId = $(this).parents(".actions-buttons").data("recipe-id");
+
+		$.post(Routing.generate('recipe_like', { id: recipeId }), null, function(data, textStatus, xhr) {
+			console.log(data.result);
+		}, 'json');
+
+		return false;
+	})
+
+	$(".actions-buttons .action:not(.disabled) a").click(function(){
+		if($(this).parents(".action").hasClass('active'))
+			$(this).parents(".action").removeClass('active')
+		else
+			$(this).parents(".action").addClass('active');
+
+		return false;
+	});
 });
 
 function formatSelection(item)

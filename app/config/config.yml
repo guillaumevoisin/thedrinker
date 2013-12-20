@@ -144,3 +144,9 @@ services:
         scope: request # needed as we have the request as a dependency here
         tags:
             - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+
+    salavert.twig.time_ago:
+        class: Salavert\Twig\Extension\TimeAgoExtension
+        arguments: [@translator]
+        tags:
+        - { name: twig.extension }

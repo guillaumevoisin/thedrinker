@@ -4,57 +4,35 @@
 {% block body -%}
     <div class="inner-content">
 
-        <div class="td-wrap td-show">
+        <div class="recipe-entry td-wrap td-show">
+            {% include 'ckRecipesBundle:Recipe:recipeShow.html.twig' with {'recipe': recipe} %}
+        </div>
 
-            <figure class="cocktail-img">
-                <img src="{{ asset(recipe.getWebPath) | imagine_filter('cocktail_view') }}"/>
-            </figure>
+        <section class="cocktail-comments">
+            <ul>
+                {% for comment in recipe.comments %}
+                    <li class="comment">
+                        <figure class="avatar">
+                            <img src="{{ asset('bundles/theme/images/avatar/default_avatar.png') }}"/>
+                        </figure>
 
-            <h1>{{ recipe.name }}</h1>
-
-            <div class="separator"></div>
-
-            <section class="cocktail-desc">
-                
-                <div class="howto">
-                    <p>{{ recipe.glassType }}</p>
-                    <p>{{ recipe.creator }}</p>
-                    <p>{{ recipe.garnish }}</p>
-                    <p>{{ recipe.difficulty }}</p>
-                </div>
-
-                <div class="text">
-                    <p>{{ recipe.description }}</p>
-                </div>
-
-                <div class="clear"></div>
-
-            </section>
-
-            <section class="cocktail-ingredients">
-                <ul>
-                {% for ing in recipe.ingredients %}
-
-                    <li class="ingredient">
-
-                        <div class="number">#{{ loop.index }}</div>
-                        <div class="info">
-                            <span class="proportion">{{ ing.proportion }} {{ ing.unit }}</span> <span class="ingredient-name">{{ ing.ingredient }}</span></h4>
+                        <div class="message">
+                            <h5 class="author">{{ comment.user }} <time datetime="{{ comment.created|date('Y-m-d H:i:s') }}">{{ comment.created|time_ago_in_words }}</time></h5>
+                            <p>{{ comment.message }}</p>
                         </div>
+
                         <div class="clear"></div>
                     </li>
-
                 {% endfor %}
-                </ul>
-            </section>
+            </ul>
 
-            <div class="separator nomarginbottom"></div>
+            <div class="add-comment">
+                
+                {{ render(controller('ckRecipesBundle:Recipe:commentNew', { id: recipe.id })) }}
 
-            {{ macros.shareButtons() }}
+            </div>
 
-            <div class="clear"></div>
-        
-        </div>
+        </section>
 
         {% if is_granted('OPERATOR', recipe) %}
 

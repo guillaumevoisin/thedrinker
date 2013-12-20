@@ -20,7 +20,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="ck\RecipesBundle\Entity\Recipe", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="ck\RecipesBundle\Entity\Recipe", inversedBy="usersFavorites")
      * @ORM\JoinTable(name="bind_users_favorite_recipes",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="recipe_id", referencedColumnName="id")}
@@ -28,11 +28,21 @@ class User extends BaseUser
      */
     protected $favoriteRecipes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="ck\RecipesBundle\Entity\Recipe", inversedBy="usersLikes")
+     * @ORM\JoinTable(name="bind_users_likes_recipes",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="recipe_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $likes;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->$favoriteRecipes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->$likes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -66,5 +76,38 @@ class User extends BaseUser
     public function getFavoriteRecipes()
     {
         return $this->favoriteRecipes;
+    }
+
+    /**
+     * Add likes
+     *
+     * @param Recipe $recipe
+     * @return User
+     */
+    public function addLike(Recipe $recipe)
+    {
+        $this->likes[] = $recipe;
+    
+        return $this;
+    }
+
+    /**
+     * Remove likes
+     *
+     * @param Recipe $recipe
+     */
+    public function removeLike(Recipe $recipe)
+    {
+        $this->likes->removeElement($recipe);
+    }
+
+    /**
+     * Get likes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLikes()
+    {
+        return $this->likes;
     }
 }

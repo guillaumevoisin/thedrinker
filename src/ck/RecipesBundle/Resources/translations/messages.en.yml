@@ -39,6 +39,10 @@ recipes:
             proportion: Proportion
             unit: Unit
     ingredients: Ingredients
+    comments:
+        title: Comments
+        form:
+            create: Add comment
 
 ingredients:
     title: Ingredients

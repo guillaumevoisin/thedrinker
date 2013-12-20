@@ -32,16 +32,24 @@
 {% macro shareButtons(recipe) %}
 <div class="actions-buttons" data-recipe-id="{{ recipe.id }}">
                 
-    <div class="action like{% if recipe in app.user.favoriteRecipes %} active{% endif %}">
-        <a href="#"><span></span></a>
+    <div class="action favorite{% if app.user is null %} disabled{% endif %}{% if app.user and recipe in app.user.favoriteRecipes %} active{% endif %}">
+        <a href="#">
+        	<span class="icon"></span>
+        </a>
     </div>
 
-    <div class="action share">
-        <a href="#"><span></span></a>
+    <div class="action like">
+        <a href="#">
+        	<span class="number">{{ recipe.likes|length }}</span>
+        	<span class="icon"></span>
+        </a>
     </div>
 
     <div class="action comment">
-        <a href="#"><span></span></a>
+        <a href="#">
+        	<span class="number">{{ recipe.comments|length }}</span>
+        	<span class="icon"></span>
+        </a>
     </div>
 
 </div>

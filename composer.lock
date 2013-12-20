@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "656cd482d95d496288dccaabfb4fa7c6",
+    "hash": "936db700e41d484e9220c17538f6712e",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1714,6 +1714,51 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "salavert/time-ago-in-words",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/salavert/time-ago-in-words.git",
+                "reference": "980d3292546f4ef972240abfcb15fa303b15c6a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/salavert/time-ago-in-words/zipball/980d3292546f4ef972240abfcb15fa303b15c6a8",
+                "reference": "980d3292546f4ef972240abfcb15fa303b15c6a8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "twig/twig": "~1.12"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Salavert": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jose Salavert",
+                    "email": "salavert@gmail.com",
+                    "homepage": "http://www.salavert.org"
+                }
+            ],
+            "description": "Twig extension where you can easily convert a datetime or timestamp to a distance of time in words.",
+            "homepage": "http://github.com/salavert/time-ago-in-words",
+            "keywords": [
+                "distance of time",
+                "time ago",
+                "time ago in words",
+                "twig"
+            ],
+            "time": "2013-05-28 17:02:26"
         },
         {
             "name": "sensio/distribution-bundle",

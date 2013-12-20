@@ -26,7 +26,8 @@
         "friendsofsymfony/rest-bundle": "1.0.*",
         "jms/serializer-bundle": "0.12",
         "willdurand/expose-translation-bundle": "master@dev",
-        "friendsofsymfony/jsrouting-bundle": "~1.1"
+        "friendsofsymfony/jsrouting-bundle": "~1.1",
+        "salavert/time-ago-in-words": "1.*"
     },
     "scripts": {
         "post-install-cmd": [

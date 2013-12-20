@@ -1,0 +1,11 @@
+{% block form_row %}
+{% spaceless %}
+    <div class="input-value">{{ form_widget(form) }}</div>
+    <div class="clear"></div>
+    {% if form.vars.errors|length %}
+        <div class="error">
+           {{ form_errors(form) }}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_row %}

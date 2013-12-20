@@ -9,9 +9,21 @@ ck\UsersBundle\Entity\User:
     manyToMany:
         favoriteRecipes:
             targetEntity: ck\RecipesBundle\Entity\Recipe
-            inversedBy: users
+            inversedBy: usersFavorites
             joinTable:
                 name: bind_users_favorite_recipes
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    recipe_id:
+                        referencedColumnName: id
+
+        likes:
+            targetEntity: ck\RecipesBundle\Entity\Recipe
+            inversedBy: usersLikes
+            joinTable:
+                name: bind_users_likes_recipes
                 joinColumns:
                     user_id:
                         referencedColumnName: id
