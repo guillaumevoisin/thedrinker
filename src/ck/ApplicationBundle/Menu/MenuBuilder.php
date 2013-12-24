@@ -27,7 +27,8 @@ class MenuBuilder
         $menu['Dashboard']->addChild('Ingredients2', array('label' => $serviceContainer->get('translator')->trans('recipes.title'), 'route' => 'recipe', 'attributes' => array('data-icon' => 'home-icon')));
         $menu['Dashboard']->addChild('Ingredients3', array('label' => $serviceContainer->get('translator')->trans('recipes.title'), 'route' => 'ingredient', 'attributes' => array('data-icon' => 'home-icon')));
 
-        $menu->addChild('Recipes', array('label' => $serviceContainer->get('translator')->trans('recipes.title'), 'route' => 'recipe', 'attributes' => array('data-icon' => 'home-icon')));
+        $menu->addChild('Recipes', array('label' => $serviceContainer->get('translator')->trans('recipes.title'), 'route' => 'recipe', 'attributes' => array('data-icon' => 'recipes')));
+        $menu->addChild('Favorites', array('label' => $serviceContainer->get('translator')->trans('recipes.favorites.title'), 'route' => 'favorite_recipes', 'attributes' => array('data-icon' => 'favorites')));
 
         switch($request->get('_route'))
         {

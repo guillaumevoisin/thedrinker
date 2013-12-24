@@ -1,0 +1,8 @@
+general:
+    field:
+        is:
+            required: "This information is required"
+            invalid: "This information is invalid"
+    email:
+        is:
+            invalid: "Invalid email address."

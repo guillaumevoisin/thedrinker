@@ -138,9 +138,6 @@
 
 	/* Icons */
 
-	.actions-buttons .action a span{ background: url(../images/icon/recipe/actions@2x.png) no-repeat 0 0; width: 30px; height:30px; display: inline-block; -webkit-background-size: 90px 60px !important; -moz-background-size: 90px 60px !important; background-size: 90px 60px !important; }
-	.actions-buttons .action a:hover span{ background-position-y: -30px; }
-	.actions-buttons .action.like span{ background-position: -30px 0 }
-	.actions-buttons .action.share span{ background-position: -60px 0 }
+	.actions-buttons .action a span.icon{ background: url(../images/icon/recipe/actions@2x.png) no-repeat 0 0; width: 30px; height:30px; display: inline-block; -webkit-background-size: 90px 60px !important; -moz-background-size: 90px 60px !important; background-size: 120px 90px !important; }
 	
 };

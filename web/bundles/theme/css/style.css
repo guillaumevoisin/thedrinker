@@ -110,11 +110,13 @@ h5{	font-weight:800; font-family:'Open Sans', sans-serif!important;}
 
 .closer-icon{		background-image:url(../images/icon_shadow/misc/accessdenied.png); background-position:0 13px;}
 .home-icon{			background-image:url(../images/icon_shadow/misc/home.png);		background-position:0 13px;}
+.recipes{			background-image:url(../images/icon_shadow/misc/wineglass.png);		background-position:0 13px;}
 .features-icon{		background-image:url(../images/icon_shadow/settings/cog4.png);	background-position:0 14px;}
 .gallery-icon{		background-image:url(../images/icon_shadow/media/image2.png);	background-position:0 13px;}
 .portfolio-icon{	background-image:url(../images/icon_shadow/media/image3.png);	background-position:0 13px;}
 .blog-icon{			background-image:url(../images/icon_shadow/tools/pencil.png);	background-position:0 14px;}
 .contact-icon{		background-image:url(../images/icon_shadow/misc/mail.png);		background-position:0 14px;}
+.favorites{		background-image:url(../images/icon_shadow/misc/cup.png);		background-position:0 14px;}
 
 .submenu{display:none;}
 
@@ -225,6 +227,7 @@ h5{	font-weight:800; font-family:'Open Sans', sans-serif!important;}
 	float:left;
 	background-image:url(../images/misc/sidebar-button.png);
 	background-repeat:no-repeat;
+	text-transform: uppercase;
 }
 
 .sidebar-button em{
@@ -248,6 +251,9 @@ h5{	font-weight:800; font-family:'Open Sans', sans-serif!important;}
 .sidebar-button-call{background-image:url(../images/icon_shadow/communication/phonehook.png);}
 .sidebar-button-text{background-image:url(../images/icon_shadow/communication/speechbubble4.png);}
 .sidebar-button-close{background-image:url(../images/icon_shadow/misc/accessdenied.png);}
+.sidebar-button-logout{background-image:url(../images/icon_shadow/arrows/bendedright.png);}
+.sidebar-button-login{background-image:url(../images/icon_shadow/misc/locked2.png);}
+.sidebar-button-account{background-image:url(../images/icon_shadow/settings/cog4.png);}
 
 .sidebar-copyright{
 	padding-top:15px;

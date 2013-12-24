@@ -38,15 +38,15 @@
         </a>
     </div>
 
-    <div class="action like">
+    <div class="action like{% if app.user is null %} disabled{% endif %}{% if app.user and recipe in app.user.likes %} active{% endif %}">
         <a href="#">
-        	<span class="number">{{ recipe.likes|length }}</span>
+        	<span class="number{% if recipe.likes|length == 0 %} display-none{% endif %}">{{ recipe.likes|length }}</span>
         	<span class="icon"></span>
         </a>
     </div>
 
     <div class="action comment">
-        <a href="#">
+        <a href="{{ path('recipe_show', { slug: recipe.slug }) }}#cocktail-comments">
         	<span class="number">{{ recipe.comments|length }}</span>
         	<span class="icon"></span>
         </a>

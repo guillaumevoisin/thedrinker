@@ -1,16 +1,8 @@
 {% extends '::base.html.twig' %}
+{% import '::macros.html.twig' as macros %}
 
 {% block body -%}
-    <h1>RecipesCategory edit</h1>
-
-    {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('recipescategory') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    
+    {{ macros.form('Recipe category edition', edit_form, delete_form) }}
+	
 {% endblock %}

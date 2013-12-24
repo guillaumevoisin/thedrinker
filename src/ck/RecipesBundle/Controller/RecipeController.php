@@ -412,16 +412,19 @@ class RecipeController extends Controller
                 $em->persist($user);
                 $em->flush();
 
+                $nb_likes = sizeof($recipe->getLikes());
+
                 $response = array(
-                    'result' => 'success',
-                    'msg' => 'Recipe liked'
+                    'result'   => 'success',
+                    'msg'      => 'Recipe liked',
+                    'nb_likes' => $nb_likes
                 );
             }
             catch(Exception $e)
             {
                 $response = array(
                     'result' => 'error',
-                    'msg' => $e->getMessage()
+                    'msg'    => $e->getMessage()
                 );
             }
         }
@@ -444,11 +447,12 @@ class RecipeController extends Controller
         // Get current user
         $securityContext = $this->get('security.context');
 
-        if(!$securityContext->isGranted('IS_AUTHENTICATED_FULLY'))
-            throw new AccessDeniedException();
+        $user = null;
+
+        if($securityContext->isGranted('IS_AUTHENTICATED_FULLY'))
+            $user = $securityContext->getToken()->getUser();
 
         $entity = new RecipesComment();
-        $user = $securityContext->getToken()->getUser();
 
         $recipe = $em->getRepository('ckRecipesBundle:Recipe')->find($id);
 
@@ -516,10 +520,10 @@ class RecipeController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            /*// ACL Creation
+            // ACL Creation
             $aclProvider = $this->get('security.acl.provider');
             $objectIdentity = ObjectIdentity::fromDomainObject($recipe);
-            $acl = $aclProvider->createAcl($objectIdentity);
+            $acl = $aclProvider->findAcl($objectIdentity);
 
             // Get current user
             $securityContext = $this->get('security.context');
@@ -534,17 +538,41 @@ class RecipeController extends Controller
             // Give access to super admin
             $acl->insertObjectAce($roleSecurityIdentity, MaskBuilder::MASK_MASTER);
             
-            $aclProvider->updateAcl($acl);*/
+            $aclProvider->updateAcl($acl);
 
             return $this->redirect($this->generateUrl('recipe_show', array('slug' => $recipe->getSlug())));
         }
-        print_r($form->getErrors());exit;
+
         $deleteForm = $this->createDeleteForm($recipe->getId());
 
         return array(
             'recipe'      => $recipe,
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Lists all favorite Recipe entities.
+     *
+     * @Route("/recipes/my/favorites", name="favorite_recipes")
+     * @Method("GET")
+     * @Template()
+     */
+    public function favoriteRecipesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $securityContext = $this->get('security.context');
+
+        if(!$securityContext->isGranted('IS_AUTHENTICATED_FULLY'))
+            throw new AccessDeniedException();
+
+        $user = $securityContext->getToken()->getUser();
+
+        $recipes = $user->getFavoriteRecipes();
+
+        return array(
+            'recipes' => $recipes
         );
     }
 }

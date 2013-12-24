@@ -22,7 +22,12 @@ class RecipeType extends AbstractType
         $recipe = null;
 
         if(!empty($options['data']))
+        {
             $recipe = $options['data'];
+            
+            if(is_null($recipe->getId()))
+                $recipe = null;
+        }
 
         $builder
             ->add('name', 'text', array(
@@ -77,13 +82,13 @@ class RecipeType extends AbstractType
                 'required' => false
             ))
             ->add('ingredients', 'collection', array(
-                    'label' => 'recipes.form.ingredients',
-                    'type'         => new RecipesIngredientsType($recipe),
-                    'allow_add'    => true,
-                    'allow_delete' => true,
-                    'prototype'    => true,
-                    'by_reference' => false
-                ))
+                'label' => 'recipes.form.ingredients',
+                'type'         => new RecipesIngredientsType($recipe),
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'by_reference' => false
+            ))
             ->add('difficulty', 'choice', array(
                 'expanded'    => true,
                 'required'    => false,

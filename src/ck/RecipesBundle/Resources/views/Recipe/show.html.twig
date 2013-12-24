@@ -8,7 +8,7 @@
             {% include 'ckRecipesBundle:Recipe:recipeShow.html.twig' with {'recipe': recipe} %}
         </div>
 
-        <section class="cocktail-comments">
+        <section class="cocktail-comments" id="cocktail-comments">
             <ul>
                 {% for comment in recipe.comments %}
                     <li class="comment">
@@ -19,6 +19,7 @@
                         <div class="message">
                             <h5 class="author">{{ comment.user }} <time datetime="{{ comment.created|date('Y-m-d H:i:s') }}">{{ comment.created|time_ago_in_words }}</time></h5>
                             <p>{{ comment.message }}</p>
+                            {% if is_granted('EDIT', recipe) %}remove{% endif %}
                         </div>
 
                         <div class="clear"></div>

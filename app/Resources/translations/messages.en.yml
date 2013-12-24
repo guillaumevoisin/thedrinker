@@ -1,0 +1,23 @@
+general:
+    login: Login
+    logout: Logout
+    account: Account
+    collapse: Collapse
+    add: Add
+    creationSucessful : Successfully added
+    edit: Edit
+    back: Back
+    cancel: Cancel
+    delete: Delete
+    update: Update
+    updating : Updating ...
+    updateSuccessful : Update successful
+    loading : Loading
+    save: Save
+    saving: Saving
+    settings: Settings
+    changesSaved: Your changes have been saved.
+    quickaccess: Quick access
+    dateadded: Date added
+    none: None
+    anonymous: Anonymous

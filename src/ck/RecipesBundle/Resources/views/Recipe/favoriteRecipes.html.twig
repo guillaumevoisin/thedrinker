@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    
+    <div class="inner-content">
+
+        <ul class="recipes-list">
+        {% for recipe in recipes %}
+
+            <li class="recipe-entry td-wrap td-show">
+
+                {% include 'ckRecipesBundle:Recipe:recipeShow.html.twig' with {'recipe': recipe} %}
+
+            </li>
+
+        {% endfor %}
+        </ul>
+
+    </div>
+{% endblock %}

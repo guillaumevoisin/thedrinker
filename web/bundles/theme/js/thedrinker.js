@@ -95,9 +95,22 @@ $(document).ready(function() {
 	$(".actions-buttons .like:not(.disabled) a").click(function(){
 
 		var recipeId = $(this).parents(".actions-buttons").data("recipe-id");
+		var elt = $(this);
 
 		$.post(Routing.generate('recipe_like', { id: recipeId }), null, function(data, textStatus, xhr) {
-			console.log(data.result);
+			if(data.result == "success")
+			{
+				if(data.nb_likes == 0)
+					elt.find(".number").hide();
+				else
+				{
+					elt.find(".number").show().css("display", "inline-block");
+					elt.find(".number").removeClass("display-none");
+				}
+				
+
+				elt.find(".number").text(data.nb_likes);
+			}
 		}, 'json');
 
 		return false;
@@ -108,8 +121,6 @@ $(document).ready(function() {
 			$(this).parents(".action").removeClass('active')
 		else
 			$(this).parents(".action").addClass('active');
-
-		return false;
 	});
 });
 

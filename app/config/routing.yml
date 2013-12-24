@@ -51,3 +51,9 @@ fos_js_routing:
 _imagine:
     resource: .
     type:     imagine
+
+login:
+    pattern:   /login
+
+logout:
+    pattern:   /logout

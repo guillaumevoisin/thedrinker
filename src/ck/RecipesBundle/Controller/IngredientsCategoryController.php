@@ -90,7 +90,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Displays a form to create a new IngredientsCategory entity.
      *
-     * @Route("/ingredientscategory/new", name="ingredientscategory_new")
+     * @Route("/admin/ingredientscategory/new", name="ingredientscategory_new")
      * @Method("GET")
      * @Template()
      */
@@ -183,7 +183,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Edits an existing IngredientsCategory entity.
      *
-     * @Route("/ingredientscategory/{id}", name="ingredientscategory_update")
+     * @Route("/admin/ingredientscategory/{id}", name="ingredientscategory_update")
      * @Method("PUT")
      * @Template("ckRecipesBundle:IngredientsCategory:edit.html.twig")
      */
@@ -216,7 +216,7 @@ class IngredientsCategoryController extends Controller
     /**
      * Deletes a IngredientsCategory entity.
      *
-     * @Route("/ingredientscategory/{id}", name="ingredientscategory_delete")
+     * @Route("/admin/ingredientscategory/{id}", name="ingredientscategory_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)

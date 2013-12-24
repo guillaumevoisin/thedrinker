@@ -4,10 +4,16 @@
 .inner-content h1{ margin-bottom: 1em; color: #777; text-shadow: 1px 1px #fff; }
 h2.logo{ text-align: center; font-family: Great Vibes; font-size: 30px; font-weight: normal; }
 
+.display-none{ display: none; }
+
 /** Select2 dropdown **/
 
 .search-item h4{ font-size: 14px; margin: 0; padding: 0; }
 .select2-highlighted .search-item h4{ color: #fff; }
+
+/** Sidebar **/
+
+.page-sidebar .logo{ margin: 0.5em auto; color:#bbb; text-shadow: 1px 1px #222; }
 
 /** Form **/
 
@@ -21,7 +27,6 @@ h2.logo{ text-align: center; font-family: Great Vibes; font-size: 30px; font-wei
 .td-form .formRow:first-child{ border-top-left-radius: 5px; border-top-right-radius: 5px }
 .td-form .formRow:last-child{ border-bottom-left-radius: 5px; border-bottom-right-radius: 5px }
 .td-form .formRow .input-label{ margin-bottom: 0.5em }
-.td-form .display-none{ display: none; }
 
 .td-form .nested-row{ background: rgb(119, 150, 151) }
 .td-form .nested-row li{ list-style: none; padding: 20px; margin-bottom: 0; border-bottom: 1px solid rgb(114, 142, 143); border-top:1px solid rgb(132, 164, 165); position: relative; }
@@ -75,7 +80,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .actions-buttons .action.share span.icon{ background-position: -60px 0 }
 .actions-buttons .action.disabled a span.icon, .actions-buttons .action.disabled a:hover span.icon, .actions-buttons .action.disabled a:active span.icon{ background-position-y: 0; opacity: 0.4 }
 .actions-buttons .action.comment span{  }
-.actions-buttons .action .number{ display: inline-block; }
+.actions-buttons .action .number{ display: inline-block; vertical-align: top; padding-top: 6px; }
+.actions-buttons .action .number.display-none{ display: none; }
 .actions-buttons .action a img{ display: inline }
 
 /** Recipes **/
@@ -103,6 +109,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .cocktail-ingredients .ingredient:last-child{ border-bottom: none }
 .cocktail-ingredients .ingredient .info span{ margin: 0; padding: 0; font-family: Open Sans; font-size: 16px; margin-right: 5px }
 .cocktail-ingredients .ingredient .info span.proportion{ color:#444; font-weight: bold }
+.cocktail-ingredients .scroll-wrapper{ height: 50px; overflow: hidden; }
 
 /* Recipes list */
 
@@ -115,14 +122,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .recipe-entry .recipe-info, .recipe-entry .recipe-story{ background:#fff; border-radius:5px; padding-bottom: 65px }
 .recipe-entry h2{ font-size: 36px; text-align: center; margin-top: 0.5em; padding: 0; margin-bottom: 0; font-weight: normal }
 .recipe-entry h2 a{ font-family: Great Vibes; }
-.recipe-entry .recipe-info .description{ padding: 30px; }
-.recipe-entry .recipe-info .description p{ font-size: 16px; font-family: 'Open Sans'; text-align: justify; line-height: 1.4em; margin-bottom: 0 }
+.recipe-entry .recipe-story .description{ padding: 30px }
+.recipe-entry .recipe-story .description p{ font-size: 15px; font-family: 'Open Sans'; text-align: justify; line-height: 1.5em; margin-bottom: 0 }
+.recipe-entry .recipe-story .description .scroll-wrapper{ height: 200px; overflow: auto; }
 .recipe-entry .actions-buttons{ position: absolute; bottom: 0; left: 0; right: 0; border-top:1px solid #eee; }
 
 .recipe-entry .cocktail-ingredients{ padding: 15px 30px; }
 .recipe-entry .recipe-info h4{ font-family: 'Open Sans'; text-transform: uppercase; font-size: 14px; margin-bottom: .7em }
-
-.recipe-entry .recipe-story .description{ padding: 30px; }
 
 /* Comments */
 

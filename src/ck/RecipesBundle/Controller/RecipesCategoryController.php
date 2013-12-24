@@ -14,7 +14,7 @@ use ck\RecipesBundle\Form\RecipesCategoryType;
 /**
  * RecipesCategory controller.
  *
- * @Route("/recipescategory")
+ * @Route("/")
  */
 class RecipesCategoryController extends Controller
 {
@@ -22,7 +22,7 @@ class RecipesCategoryController extends Controller
     /**
      * Lists all RecipesCategory entities.
      *
-     * @Route("/", name="recipescategory")
+     * @Route("/recipescategories", name="recipescategory")
      * @Method("GET")
      * @Template()
      */
@@ -39,7 +39,7 @@ class RecipesCategoryController extends Controller
     /**
      * Creates a new RecipesCategory entity.
      *
-     * @Route("/", name="recipescategory_create")
+     * @Route("/admin/recipescategories", name="recipescategory_create")
      * @Method("POST")
      * @Template("ckRecipesBundle:RecipesCategory:new.html.twig")
      */
@@ -77,7 +77,12 @@ class RecipesCategoryController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Create',
+            'attr' => array(
+                'class' => 'buttonS bGreen'
+            )
+        ));
 
         return $form;
     }
@@ -85,7 +90,7 @@ class RecipesCategoryController extends Controller
     /**
      * Displays a form to create a new RecipesCategory entity.
      *
-     * @Route("/new", name="recipescategory_new")
+     * @Route("/admin/recipescategories/new", name="recipescategory_new")
      * @Method("GET")
      * @Template()
      */
@@ -103,7 +108,7 @@ class RecipesCategoryController extends Controller
     /**
      * Finds and displays a RecipesCategory entity.
      *
-     * @Route("/{id}", name="recipescategory_show")
+     * @Route("/recipescategories/{id}", name="recipescategory_show")
      * @Method("GET")
      * @Template()
      */
@@ -128,7 +133,7 @@ class RecipesCategoryController extends Controller
     /**
      * Displays a form to edit an existing RecipesCategory entity.
      *
-     * @Route("/{id}/edit", name="recipescategory_edit")
+     * @Route("/admin/recipescategories/{id}/edit", name="recipescategory_edit")
      * @Method("GET")
      * @Template()
      */
@@ -166,14 +171,19 @@ class RecipesCategoryController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Update',
+            'attr' => array(
+                'class' => 'buttonS bGreen'
+            )
+        ));
 
         return $form;
     }
     /**
      * Edits an existing RecipesCategory entity.
      *
-     * @Route("/{id}", name="recipescategory_update")
+     * @Route("/admin/recipescategories/{id}", name="recipescategory_update")
      * @Method("PUT")
      * @Template("ckRecipesBundle:RecipesCategory:edit.html.twig")
      */
@@ -206,7 +216,7 @@ class RecipesCategoryController extends Controller
     /**
      * Deletes a RecipesCategory entity.
      *
-     * @Route("/{id}", name="recipescategory_delete")
+     * @Route("/admin/recipescategories/{id}", name="recipescategory_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -249,7 +259,7 @@ class RecipesCategoryController extends Controller
     /**
      * Lists Recipes categories entities for autocomplete fields.
      *
-     * @Route("/recipes_categories_autocomplete", name="recipes_categories_aucomplete", options={"expose"=true})
+     * @Route("/recipescategories/recipes_categories_autocomplete", name="recipes_categories_aucomplete", options={"expose"=true})
      */
     public function recipesCategoriesAutoCompleteAction(Request $request)
     {
@@ -284,7 +294,7 @@ class RecipesCategoryController extends Controller
     /**
      * Retrieve an Ingredient Category entity
      *
-     * @Route("/{ids}", name="recipes_categories_get", options={"expose"=true})
+     * @Route("/recipescategories/{ids}", name="recipes_categories_get", options={"expose"=true})
      */
     public function getAction(Request $request, $ids)
     {

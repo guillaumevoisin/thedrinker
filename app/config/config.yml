@@ -73,7 +73,14 @@ assetic:
         #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 
 liip_imagine:
-    data_root: /web/uploads
+    driver:               gd
+    web_root:             %kernel.root_dir%/../web
+    data_root:            %kernel.root_dir%/../web
+    cache_mkdir_mode:     0777
+    cache_prefix:         /media/cache
+    cache:                web_path
+    cache_clearer:        true
+    data_loader:          filesystem
     filter_sets:
         thumb:
             quality: 75
