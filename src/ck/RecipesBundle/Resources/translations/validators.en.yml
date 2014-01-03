@@ -4,5 +4,7 @@ ingredients:
         volume_maximum: Maximum value is 150
         alcohol_volume_minimum: Minimum value is 0
         alcohol_volume_maximum: Maximum value is 80
-        age_minimum: Minimum age is 50
+        age_minimum: Minimum age is 0
         age_maximum: Maximum age is 50
+        price_maximum: Maximum price is 0
+        price_minimum: Minimum price is 1000

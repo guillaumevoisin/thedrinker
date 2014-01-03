@@ -61,6 +61,17 @@ class Ingredient
     protected $age;
 
     /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1000,
+     *      minMessage = "ingredients.form.price_minimum",
+     *      maxMessage = "ingredients.form.price_maximum"
+     * )
+     */
+    protected $price;
+
+    /**
      * @ORM\ManyToMany(targetEntity="IngredientsCategory", inversedBy="ingredients")
      * @ORM\JoinTable(name="bind_ingredients_categories",
      *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")},
@@ -228,6 +239,29 @@ class Ingredient
     public function getAlcoholVolume()
     {
         return $this->alcoholVolume;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     * @return Ingredient
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string 
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     /**

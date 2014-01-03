@@ -816,6 +816,27 @@ class Recipe
         return $totalDegree;
     }
 
+    public function getTotalPrice()
+    {
+        $ingredients = $this->getIngredients();
+
+        $totalPrice = 0;
+
+        foreach ($ingredients as $ingredient)
+        {
+            $ingdtPrice = $ingredient->getIngredient()->getPrice();
+            $ingdtVolume = $ingredient->getIngredient()->getVolume();
+
+            if(!empty($ingdtPrice) && !empty($ingdtVolume))
+            {
+                $ingdtProportionPrice = ($ingdtPrice / $ingdtVolume) * $ingredient->getProportion();
+                $totalPrice += $ingdtProportionPrice;
+            }
+        }
+
+        return round($totalPrice, 2);
+    }
+
 
     public function __toString()
     {

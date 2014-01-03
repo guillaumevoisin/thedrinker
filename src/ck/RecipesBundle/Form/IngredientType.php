@@ -41,6 +41,10 @@ class IngredientType extends AbstractType
                 'label'    => 'ingredients.form.alcoholVolume',
                 'required' => false
             ))
+            ->add('price', 'text', array(
+                'label'    => 'ingredients.form.price',
+                'required' => false
+            ))
             ->add('age', 'text', array(
                 'label'    => 'ingredients.form.age',
                 'required' => false

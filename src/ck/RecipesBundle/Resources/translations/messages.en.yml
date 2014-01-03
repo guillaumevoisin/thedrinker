@@ -54,6 +54,7 @@ ingredients:
         description: Description
         volume: Volume
         alcoholVolume: Alcohol volume
+        price: Price
         age: Age
         categories: Categories
         searchfor: Search categories

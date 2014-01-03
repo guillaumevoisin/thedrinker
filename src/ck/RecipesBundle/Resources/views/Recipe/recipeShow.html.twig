@@ -3,7 +3,33 @@
 <div class="swiper-container">
     <div class="swiper-wrapper">
 
-        <div class="swiper-slide"> 
+        <div class="swiper-slide">
+
+            <div class="cocktail-flags">
+
+                {% if recipe.getTotalDegree() > 30 %}
+                    {% set degreeClass = 'strong-3' %}
+                    <span class="cocktail-flag strong-3"></span>
+                {% elseif recipe.getTotalDegree() > 20 and recipe.getTotalDegree() <= 30 %}
+                    {% set degreeClass = 'strong-2' %}
+                    <span class="cocktail-flag strong-2"></span>
+                {% else %}
+                    {% set degreeClass = 'strong-1' %}
+                    <span class="cocktail-flag strong-1"></span>
+                {% endif %}
+
+                {% if recipe.getTotalPrice() > 10 %}
+                    {% set priceClass = 'expensive-3' %}
+                    <span class="cocktail-flag expensive-3"></span>
+                {% elseif recipe.getTotalPrice() > 5 and recipe.getTotalPrice() <= 10 %}
+                    {% set priceClass = 'expensive-2' %}
+                    <span class="cocktail-flag expensive-2"></span>
+                {% else %}
+                    {% set priceClass = 'expensive-1' %}
+                    <span class="cocktail-flag expensive-1"></span>
+                {% endif %}
+
+            </div>
 
             <div class="nav-arrow arrow-right"></div>
             
@@ -15,8 +41,6 @@
         </div>
 
         <div class="swiper-slide recipe-info">
-
-            <div class="total-degree">{{ recipe.getTotalDegree() }}</div>
 
             <div class="nav-arrow arrow-left"></div>
             <div class="nav-arrow arrow-right"></div>
@@ -47,6 +71,24 @@
             <div class="nav-arrow arrow-left"></div>
 
             <h2><a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}">{{ recipe.name }}</a></h2>
+
+            <section class="details">
+                <ul>
+                    <li class="strenth">
+                        <div class="icon-wrapper">
+                            <div class="icon {{ degreeClass }}"></div>
+                        </div>
+                        <span class="text">{{ recipe.getTotalDegree() }} %</span>
+                    </li>
+                    <li class="price">
+                        <div class="icon-wrapper">
+                            <div class="icon {{ priceClass }}"></div>
+                        </div>
+                        <span class="text">{{ recipe.getTotalPrice() }} &euro;</span>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </section>
 
             <section class="description">
                 <p>{{ recipe.description }}</p>

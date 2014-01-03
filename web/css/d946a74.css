@@ -5022,16 +5022,44 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .recipe-entry .recipe-info, .recipe-entry .recipe-story{ background:#fff; border-radius:5px; padding-bottom: 65px }
 .recipe-entry h2{ font-size: 36px; text-align: center; margin-top: 0.5em; padding: 0; margin-bottom: 0; font-weight: normal }
 .recipe-entry h2 a{ font-family: Great Vibes; }
+
+/* Story */
+
 .recipe-entry .recipe-story .description{ padding: 50px }
 .recipe-entry .recipe-story .description p{ font-size: 15px; font-family: 'Open Sans'; text-align: justify; line-height: 1.5em; margin-bottom: 0 }
 .recipe-entry .recipe-story .description .scroll-wrapper{ height: 200px; overflow: auto; }
 .recipe-entry .actions-buttons{ position: absolute; bottom: 0; left: 0; right: 0; border-top:1px solid #eee; }
+
+.recipe-entry .recipe-story .details{ padding-top: 30px }
+.recipe-entry .recipe-story .details ul{ overflow: hidden; border-bottom: 1px solid #ccc; margin-bottom: 0 }
+.recipe-entry .recipe-story .details li:first-child{ border: none; }
+.recipe-entry .recipe-story .details li{ width: 49.5%; float: left; list-style: none; text-align: center; border-left: 1px solid #ccc; margin-bottom: 0; padding: 15px 0; font-size: 16px }
+.recipe-entry .recipe-story .details li .icon-wrapper{ width:40px; height: 40px; text-align: center; background: #888; border-radius:40px; display: inline-block; margin-right: 10px }
+.recipe-entry .recipe-story .details li .icon{ width:30px; height:30px; display: inline-block; background: url(../bundles/theme/images/icon/recipe/actions.png) no-repeat; vertical-align: middle; margin-top: 5px }
+.recipe-entry .recipe-story .details li .text{ margin-top: 3px; display: inline-block; vertical-align: sub; }
+.recipe-entry .recipe-story .details li.strenth .icon{ background-position: -270px 0 }
+.recipe-entry .recipe-story .details li.price .icon{ background-position: -300px 0 }
+
 
 .recipe-entry .nav-arrow{ width: 30px; height: 30px; position: absolute; right: 0; top: 50%; margin-top: -15px; background: url(../bundles/theme/images/icon/recipe/actions.png) no-repeat -120px 0; display: block; z-index: 1 }
 .recipe-entry .arrow-left{ background-position: -150px 0; left:0; right:auto; }
 
 .recipe-entry .cocktail-ingredients{ padding: 15px 50px; }
 .recipe-entry .recipe-info h4{ font-family: 'Open Sans'; text-transform: uppercase; font-size: 14px; margin-bottom: .7em }
+
+
+
+/* Flags */
+.recipe-entry .cocktail-flags{ position: absolute; top: 10px; right: 10px; z-index: 1 }
+.recipe-entry .cocktail-flag{ width: 30px; height:30px; display: block; background: url(../bundles/theme/images/icon/recipe/actions.png) }
+
+.recipe-entry .cocktail-flag.strong-1, .recipe-entry .recipe-story .details li .icon.strong-1{ background-position: -270px -60px }
+.recipe-entry .cocktail-flag.strong-2, .recipe-entry .recipe-story .details li .icon.strong-2{ background-position: -270px -30px }
+.recipe-entry .cocktail-flag.strong-3, .recipe-entry .recipe-story .details li .icon.strong-3{ background-position: -270px 0 }
+
+.recipe-entry .cocktail-flag.expensive-1, .recipe-entry .recipe-story .details li .icon.expensive-1{ background-position: -300px -60px }
+.recipe-entry .cocktail-flag.expensive-2, .recipe-entry .recipe-story .details li .icon.expensive-2{ background-position: -300px -30px }
+.recipe-entry .cocktail-flag.expensive-3, .recipe-entry .recipe-story .details li .icon.expensive-3{ background-position: -300px 0 }
 
 /* Comments */
 
@@ -5061,7 +5089,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 @media all and (-webkit-min-device-pixel-ratio:2){
-	.recipe-entry .cocktail-ingredients{ padding: 15px 30px; }
+	.recipe-entry .cocktail-ingredients{ padding: 15px 45px; }
+	.recipe-entry .recipe-story .details{ padding-top: 15px }
+	.recipe-entry .recipe-story .details li{ padding: 5px 0; }
+	.recipe-entry .recipe-story .details li .icon-wrapper{ margin-right: 0 }
 	.cocktail-ingredients .ingredient{ line-height: 16px; }
 	.cocktail-ingredients .ingredient .info span{ font-size: 14px }
 }
@@ -5207,9 +5238,12 @@ div.selector,div.selector span,div.checker span,div.radio span,div.uploader,div.
 
 	/* Icons */
 
-	.actions-buttons .action a span.icon{ background: url(../bundles/theme/images/icon/recipe/actions@2x.png) no-repeat 0 0; width: 30px; height:30px; display: inline-block; -webkit-background-size: 90px 60px !important; -moz-background-size: 90px 60px !important; background-size: 270px 90px !important; }
+	.actions-buttons .action a span.icon, .recipe-entry .cocktail-flag{ background: url(../bundles/theme/images/icon/recipe/actions@2x.png) no-repeat 0 0; width: 30px; height:30px; display: inline-block; -webkit-background-size: 330px 90px !important; -moz-background-size: 330px 90px !important; background-size: 330px 90px !important; }
 
-	.recipe-entry .nav-arrow{ background: url(../bundles/theme/images/icon/recipe/actions@2x.png) no-repeat -120px 0; display: block; z-index: 1; background-size: 270px 90px !important; }
+	.recipe-entry .cocktail-flag{ width: 30px; height:30px; display: block }
+	.recipe-entry .recipe-story .details li .icon{ width:30px; height:30px; display: inline-block; background: url(../bundles/theme/images/icon/recipe/actions@2x.png) no-repeat; vertical-align: middle; margin-top: 5px; -webkit-background-size: 330px 90px !important; -moz-background-size: 330px 90px !important; background-size: 330px 90px !important }
+
+	.recipe-entry .nav-arrow{ background: url(../bundles/theme/images/icon/recipe/actions@2x.png) no-repeat -120px 0; display: block; z-index: 1; -webkit-background-size: 330px 90px !important; -moz-background-size: 330px 90px !important; background-size: 330px 90px !important; }
 	.recipe-entry .arrow-left{ background-position: -150px 0; left:0; right:auto; }
 	
 };

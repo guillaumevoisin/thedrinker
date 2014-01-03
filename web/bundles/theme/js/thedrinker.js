@@ -75,6 +75,7 @@ $(document).ready(function() {
 		$(this).swiper({
 			mode:'horizontal',
 			calculateHeight: true,
+			visibilityFullFit: true,
 			grabCursor: true
 		});
 	});	
