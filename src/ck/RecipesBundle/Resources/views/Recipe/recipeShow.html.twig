@@ -4,6 +4,8 @@
     <div class="swiper-wrapper">
 
         <div class="swiper-slide"> 
+
+            <div class="nav-arrow arrow-right"></div>
             
             <figure class="cocktail-img">
                 <a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}"><img src="{{ asset(recipe.getWebPath) | imagine_filter('cocktail_view') }}"/></a>
@@ -13,19 +15,22 @@
         </div>
 
         <div class="swiper-slide recipe-info">
+
+            <div class="total-degree">{{ recipe.getTotalDegree() }}</div>
+
+            <div class="nav-arrow arrow-left"></div>
+            <div class="nav-arrow arrow-right"></div>
             
             <h2><a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}">{{ recipe.name }}</a></h2>
 
             <section class="cocktail-ingredients">
-
-                <h4>{% trans %}ingredients.title{% endtrans %}</h4>
 
                 <ul>
                 {% for ing in recipe.ingredients %}
                 
                     <li class="ingredient">
                         <div class="info">
-                            <span class="proportion">{{ ing.proportion }}</span> <span class="unit">{{ ing.unit }}</span> <span class="ingredient-name">{{ ing.ingredient }}</span></h4>
+                            <span class="proportion" data-orig-proportion="{{ ing.proportion }}">{{ ing.proportion }}</span> <span class="unit">{{ ing.unit }}</span> <span class="ingredient-name">{{ ing.ingredient }}</span></h4>
                         </div>
                     </li>
                 
@@ -33,11 +38,13 @@
                 </ul>
             </section>
 
-            {{ macros.shareButtons(recipe) }}
+            {{ macros.recipeButtons(recipe) }}
 
         </div>
 
         <div class="swiper-slide recipe-story">
+
+            <div class="nav-arrow arrow-left"></div>
 
             <h2><a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}">{{ recipe.name }}</a></h2>
 

@@ -796,6 +796,26 @@ class Recipe
         unset($this->file);
     }
 
+    public function getTotalDegree()
+    {
+        $ingredients = $this->getIngredients();
+
+        $totalProportions = 0;
+        $totalIngdtsDegree = 0;
+
+        foreach ($ingredients as $ingredient)
+        {
+            $ingdtPrct = $ingredient->getProportion() * ($ingredient->getIngredient()->getAlcoholVolume() / 100);
+            $totalIngdtsDegree += $ingdtPrct;
+
+            $totalProportions += $ingredient->getProportion();
+        }
+
+        $totalDegree = round($totalIngdtsDegree / ($totalProportions) * 100);
+
+        return $totalDegree;
+    }
+
 
     public function __toString()
     {

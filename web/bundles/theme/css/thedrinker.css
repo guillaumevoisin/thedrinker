@@ -78,6 +78,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .actions-buttons .action.favorite span.icon{ background-position: -30px 0 }
 .actions-buttons .action.like span.icon{ background-position: -90px 0 }
 .actions-buttons .action.share span.icon{ background-position: -60px 0 }
+.actions-buttons .action.less span.icon{ background-position: -210px 0 }
+.actions-buttons .action.more span.icon{ background-position: -180px 0 }
+.actions-buttons .action.drinks-number span.icon{ background-position: -240px -30px }
+.actions-buttons .action.drinks-number.plural span.icon{ background-position: -240px -60px }
 .actions-buttons .action.disabled a span.icon, .actions-buttons .action.disabled a:hover span.icon, .actions-buttons .action.disabled a:active span.icon{ background-position-y: 0; opacity: 0.4 }
 .actions-buttons .action.comment span{  }
 .actions-buttons .action .number{ display: inline-block; vertical-align: top; padding-top: 6px; }
@@ -122,13 +126,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .recipe-entry .recipe-info, .recipe-entry .recipe-story{ background:#fff; border-radius:5px; padding-bottom: 65px }
 .recipe-entry h2{ font-size: 36px; text-align: center; margin-top: 0.5em; padding: 0; margin-bottom: 0; font-weight: normal }
 .recipe-entry h2 a{ font-family: Great Vibes; }
-.recipe-entry .recipe-story .description{ padding: 30px }
+.recipe-entry .recipe-story .description{ padding: 50px }
 .recipe-entry .recipe-story .description p{ font-size: 15px; font-family: 'Open Sans'; text-align: justify; line-height: 1.5em; margin-bottom: 0 }
 .recipe-entry .recipe-story .description .scroll-wrapper{ height: 200px; overflow: auto; }
 .recipe-entry .actions-buttons{ position: absolute; bottom: 0; left: 0; right: 0; border-top:1px solid #eee; }
 
-.recipe-entry .cocktail-ingredients{ padding: 15px 30px; }
+.recipe-entry .nav-arrow{ width: 30px; height: 30px; position: absolute; right: 0; top: 50%; margin-top: -15px; background: url(../images/icon/recipe/actions.png) no-repeat -120px 0; display: block; z-index: 1 }
+.recipe-entry .arrow-left{ background-position: -150px 0; left:0; right:auto; }
+
+.recipe-entry .cocktail-ingredients{ padding: 15px 50px; }
 .recipe-entry .recipe-info h4{ font-family: 'Open Sans'; text-transform: uppercase; font-size: 14px; margin-bottom: .7em }
+.recipe-entry .total-degree{ position: absolute; left: 0; top: 15px; background: url(../images/icon/recipe/ribbon.png) no-repeat; width: 109px; height: 53px; text-align: center; }
 
 /* Comments */
 
@@ -143,8 +151,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .cocktail-comments .add-comment textarea{ border:none; display: block; padding: 15px; font-family: 'Open Sans' }
 
 /**	Desktop **/
-@media (min-width: 700px) and (orientation: landscape)
-{
+@media (min-width: 700px) and (orientation: landscape){
 	.td-form .formRow .input-label{
 		float: left;
 		width: 23%;
@@ -156,4 +163,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 		float: left;
 		width: 67%;
 	}
+}
+
+@media all and (-webkit-min-device-pixel-ratio:2){
+	.recipe-entry .cocktail-ingredients{ padding: 15px 30px; }
+	.cocktail-ingredients .ingredient{ line-height: 16px; }
+	.cocktail-ingredients .ingredient .info span{ font-size: 14px }
 }

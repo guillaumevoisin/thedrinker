@@ -122,6 +122,36 @@ $(document).ready(function() {
 		else
 			$(this).parents(".action").addClass('active');
 	});
+
+	// Number of drinks
+	$(".adjust-proportions .operation a").click(function(){
+		var elt = $(this).parents(".adjust-proportions").find(".drinks-number .number");
+		var number = parseFloat(elt.text());
+
+		if($(this).parents(".action").hasClass("less"))
+		{
+			if(number > 1)
+				number--;
+		}
+		else if($(this).parents(".action").hasClass("more"))
+		{
+			number++;
+		}
+
+		if(number > 1)
+			elt.parents(".action").addClass("plural");
+		else
+			elt.parents(".action").removeClass("plural");
+
+		$(this).parents(".recipe-entry").find(".cocktail-ingredients li").each(function(){
+			var pp = parseFloat($(this).find(".proportion").data("orig-proportion"));
+			$(this).find(".proportion").text(pp*number);
+		})
+
+		elt.text(number);
+
+		return false;
+	})
 });
 
 function formatSelection(item)

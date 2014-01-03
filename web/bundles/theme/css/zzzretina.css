@@ -138,6 +138,9 @@
 
 	/* Icons */
 
-	.actions-buttons .action a span.icon{ background: url(../images/icon/recipe/actions@2x.png) no-repeat 0 0; width: 30px; height:30px; display: inline-block; -webkit-background-size: 90px 60px !important; -moz-background-size: 90px 60px !important; background-size: 120px 90px !important; }
+	.actions-buttons .action a span.icon{ background: url(../images/icon/recipe/actions@2x.png) no-repeat 0 0; width: 30px; height:30px; display: inline-block; -webkit-background-size: 90px 60px !important; -moz-background-size: 90px 60px !important; background-size: 270px 90px !important; }
+
+	.recipe-entry .nav-arrow{ background: url(../images/icon/recipe/actions@2x.png) no-repeat -120px 0; display: block; z-index: 1; background-size: 270px 90px !important; }
+	.recipe-entry .arrow-left{ background-position: -150px 0; left:0; right:auto; }
 	
 };
