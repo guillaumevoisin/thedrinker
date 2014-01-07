@@ -50,7 +50,7 @@ class IngredientType extends AbstractType
                 'required' => false
             ))
         ;
-
+        
         $transformer = new IngredientsCategoriesToStringTransformer($entityManager);
         $builder->add(
             $builder->create('categories', 'hidden', array(

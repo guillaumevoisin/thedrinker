@@ -83,7 +83,7 @@ class RecipeType extends AbstractType
             ))
             ->add('ingredients', 'collection', array(
                 'label' => 'recipes.form.ingredients',
-                'type'         => new RecipesIngredientsType($recipe),
+                'type'         => new RecipesIngredientsType($recipe, $entityManager),
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'prototype'    => true,

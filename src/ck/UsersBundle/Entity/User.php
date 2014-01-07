@@ -41,8 +41,8 @@ class User extends BaseUser
     {
         parent::__construct();
 
-        $this->$favoriteRecipes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->$likes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->favoriteRecipes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->likes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

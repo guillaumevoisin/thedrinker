@@ -5,6 +5,7 @@
 h2.logo{ text-align: center; font-family: Great Vibes; font-size: 30px; font-weight: normal; }
 
 .display-none{ display: none; }
+hr{ border-top: 1px solid #fff; border-bottom: 1px solid #eee; margin: 1em 0; }
 
 /** Select2 dropdown **/
 
@@ -39,13 +40,16 @@ h2.logo{ text-align: center; font-family: Great Vibes; font-size: 30px; font-wei
 .td-form .delete{ position: absolute; bottom: 10px; right: 10px }
 .td-form .delete .submit{ padding: 0; background: none; border:none }
 .td-form label{ font-family: 'Open Sans'; font-size: 14px }
-.td-form input[type="text"], .td-form input[type="password"], .td-form textarea{ padding:7px; border:1px solid #ccc; border-radius: 3px; font-size: 12px; color:#bbb; box-shadow: 0 0 6px #eee inset; display: inline; width: 100%; font-family: Open Sans }
+.td-form input[type="text"], .td-form input[type="password"], .td-form input[type="email"], .td-form textarea{ padding:7px; border:1px solid #ccc; border-radius: 3px; font-size: 12px; color:#bbb; box-shadow: 0 0 6px #eee inset; display: inline; width: 100%; font-family: Open Sans }
 .td-form textarea{ min-height: 100px }
 .td-form .input-wrapper{ float: left; margin-right: 10px; text-align: center; }
 .td-form .add-item{ text-align: center; }
 .td-form .remove-row{ text-align: right; margin-bottom: 0 }
 
 .record_actions li{ float: left; list-style: none; margin-right: 10px }
+
+/* Register */
+.confirmed .td-form{ padding: 20px; }
 
 /* Errors */
 .td-form .formRow .error{ margin-top: 0.5em }

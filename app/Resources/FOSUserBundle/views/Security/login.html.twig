@@ -36,6 +36,10 @@
 			{% endif %}
 
 	    	<p><input type="submit" id="_submit" name="_submit" class="buttonS bBlue" value="{{ 'security.login.submit'|trans }}" /></p>
+
+	    	<hr>
+
+	    	<p>{% trans %}security.register.msg{% endtrans %} <a href="{{ path('register') }}" class="buttonS bGreen">{% trans %}security.register.btn{% endtrans %}</a></p>
 	    	
     	</form>
 

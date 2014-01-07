@@ -5,8 +5,13 @@ security:
         password: Password
         remember_me: Keep me connected
         submit: Login
+    register:
+        title: Registration
+        msg: You don't have an account yet ?
+        btn: Register
 general:
     application_name: The Drinker
+    drink_msg: Let's drink some cocktails!
     remove: Remove
     loading_content: Loading content...
     loading_content_desc: Loading depends on your connection speed!

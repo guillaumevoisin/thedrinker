@@ -23,10 +23,6 @@ class MenuBuilder
         $menu->setCurrentUri($serviceContainer->get('request')->getRequestUri());
 
         $menu->addChild('Dashboard', array('label' => $serviceContainer->get('translator')->trans('dashboard.title'), 'route' => 'dashboard', 'attributes' => array('data-icon' => 'home-icon')));
-        $menu['Dashboard']->addChild('Ingredients1', array('label' => $serviceContainer->get('translator')->trans('recipes.title'), 'route' => 'dashboard', 'attributes' => array('data-icon' => 'home-icon')));
-        $menu['Dashboard']->addChild('Ingredients2', array('label' => $serviceContainer->get('translator')->trans('recipes.title'), 'route' => 'recipe', 'attributes' => array('data-icon' => 'home-icon')));
-        $menu['Dashboard']->addChild('Ingredients3', array('label' => $serviceContainer->get('translator')->trans('recipes.title'), 'route' => 'ingredient', 'attributes' => array('data-icon' => 'home-icon')));
-
         $menu->addChild('Recipes', array('label' => $serviceContainer->get('translator')->trans('recipes.title'), 'route' => 'recipe', 'attributes' => array('data-icon' => 'recipes')));
         $menu->addChild('Favorites', array('label' => $serviceContainer->get('translator')->trans('recipes.favorites.title'), 'route' => 'favorite_recipes', 'attributes' => array('data-icon' => 'favorites')));
 

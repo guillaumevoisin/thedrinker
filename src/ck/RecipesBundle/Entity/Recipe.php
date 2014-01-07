@@ -808,7 +808,12 @@ class Recipe
             $ingdtPrct = $ingredient->getProportion() * ($ingredient->getIngredient()->getAlcoholVolume() / 100);
             $totalIngdtsDegree += $ingdtPrct;
 
-            $totalProportions += $ingredient->getProportion();
+            if($ingredient->getUnit() == "dash")
+                $proportion = 0.1 * $ingredient->getProportion();
+            else
+                $proportion = $ingredient->getProportion();
+
+            $totalProportions += $proportion;
         }
 
         $totalDegree = round($totalIngdtsDegree / ($totalProportions) * 100);
@@ -829,7 +834,12 @@ class Recipe
 
             if(!empty($ingdtPrice) && !empty($ingdtVolume))
             {
-                $ingdtProportionPrice = ($ingdtPrice / $ingdtVolume) * $ingredient->getProportion();
+                if($ingredient->getUnit() == "dash")
+                    $proportion = 0.1 * $ingredient->getProportion();
+                else
+                    $proportion = $ingredient->getProportion();
+
+                $ingdtProportionPrice = ($ingdtPrice / $ingdtVolume) * $proportion;
                 $totalPrice += $ingdtProportionPrice;
             }
         }

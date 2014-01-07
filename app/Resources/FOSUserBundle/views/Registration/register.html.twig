@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+	<div class="inner-content">
+
+		<h1>{% trans %}security.register.title{% endtrans %}</h1>
+
+    	<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+
+			<div class="td-wrap td-form">
+
+			    {{ form_widget(form) }}
+
+			</div>
+
+			<p><input type="submit" value="{{ 'security.register.btn'|trans }}" class="buttonS bBlue" /></p>
+
+		</form>
+
+    </div>
+
+{% endblock %}

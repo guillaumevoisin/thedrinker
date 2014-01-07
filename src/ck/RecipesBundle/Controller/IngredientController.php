@@ -3,6 +3,7 @@
 namespace ck\RecipesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -266,5 +267,71 @@ class IngredientController extends Controller
             ))
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists Ingredients entities for autocomplete fields.
+     *
+     * @Route("/ingredients_autocomplete", name="ingredients_aucomplete", options={"expose"=true})
+     */
+    public function ingredientsAutoCompleteAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $term = $request->request->get('q');
+        $page = $request->request->get('page');
+        $nb_results = $request->request->get('page_limit');
+
+        $ingredients = $em->getRepository('ckRecipesBundle:Ingredient')->findLikeName($term, $page, $nb_results);
+        $total_results = $em->getRepository('ckRecipesBundle:Ingredient')->getNbResults($term);
+
+        $ingredientsList = array();
+
+        if($ingredients)
+        {
+            foreach ($ingredients as $ingredient)
+            {
+                $ingredientsList[] = array(
+                    'id'          => $ingredient->getId(),
+                    'title'       => $ingredient->getName()
+                );
+            }
+        }
+
+        $response = new Response(json_encode(array('items' => $ingredientsList, 'total' => $total_results)));
+        $response->headers->set('Content-Type', 'application/json');
+        
+        return $response;
+    }
+
+    /**
+     * Retrieve an Ingredient entity
+     *
+     * @Route("/ingredients/{ids}", name="ingredients_get", options={"expose"=true})
+     */
+    public function getAction(Request $request, $ids)
+    {
+        $ingredients_ids = array($ids);
+
+        if(preg_match("/,/", $ids))
+            $ingredients_ids = explode(",", $ids);
+
+        $em = $this->getDoctrine()->getManager();
+        $ingredients = $em->getRepository('ckRecipesBundle:Ingredient')->findBy( array('id' => $ingredients_ids) );
+
+        if(!$ingredients)
+            throw new \Exception($this->get('translator')->trans( 'ingredients #' . $ids . ' can\'t be found' ));
+
+        $ingredientsList = array();
+
+        foreach ($ingredients as $ingredient)
+        {
+            $ingredientsList[] = array(
+                'id'          => $ingredient->getId(),
+                'title'       => $ingredient->getName()
+            );
+        }
+
+        return new Response(json_encode($ingredientsList));
     }
 }
