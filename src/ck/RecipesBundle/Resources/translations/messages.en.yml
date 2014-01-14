@@ -50,6 +50,8 @@ recipes:
 ingredients:
     title: Ingredients
     form:
+        add: New ingredient
+        edit: Update ingredient
         name: Name
         description: Description
         volume: Volume

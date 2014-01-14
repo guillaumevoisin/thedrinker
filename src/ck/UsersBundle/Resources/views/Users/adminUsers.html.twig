@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    
+    <div class="inner-content">
+
+        <div class="td-wrap td-show admin-dashboard">
+        
+        	<p>Users</p>
+
+			<ul>
+        	{% for user in users %}
+        		<li>{{ user }} : {{ user.getRoles()|join(", ") }}</li>
+        	{% endfor %}
+        	</ul>
+
+        </div>
+
+    </div>
+{% endblock %}

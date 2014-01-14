@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Accessor;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ck\RecipesBundle\Entity\RecipesRepository")
  * @ORM\Table(name="recipes")
  * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all") 

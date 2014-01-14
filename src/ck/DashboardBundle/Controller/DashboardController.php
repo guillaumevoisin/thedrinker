@@ -16,4 +16,13 @@ class DashboardController extends Controller
     {
         return array();
     }
+
+    /**
+     * @Route("/admin", name="admin_dashboard")
+     * @Template()
+     */
+    public function adminAction()
+    {
+        return array();
+    }
 }

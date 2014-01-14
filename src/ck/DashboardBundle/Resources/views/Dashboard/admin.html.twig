@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    
+    <div class="inner-content">
+
+        <div class="td-wrap td-show admin-dashboard">
+        
+        	<p>Admin section</p>
+
+        	<ul>
+        		<li><a href="{{ path('recipe_new') }}" class="buttonS bGreen" title="{% trans %}recipes.form.add{% endtrans %}">{% trans %}recipes.form.add{% endtrans %}</a></li>
+        		<li><a href="{{ path('ingredient_new') }}" class="buttonS bGreen" title="{% trans %}ingredients.form.add{% endtrans %}">{% trans %}ingredients.form.add{% endtrans %}</a></li>
+        	</ul>
+
+        </div>
+
+    </div>
+{% endblock %}

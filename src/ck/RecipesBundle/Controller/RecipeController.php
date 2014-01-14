@@ -575,4 +575,39 @@ class RecipeController extends Controller
             'recipes' => $recipes
         );
     }
+
+    /**
+     * Lists Recipes entities for autocomplete fields.
+     *
+     * @Route("/recipes_autocomplete", name="recipes_aucomplete", options={"expose"=true})
+     */
+    public function recipesAutoCompleteAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $term = $request->request->get('q');
+        $page = $request->request->get('page');
+        $nb_results = $request->request->get('page_limit');
+
+        $recipes = $em->getRepository('ckRecipesBundle:Recipe')->findLikeName($term, $page, $nb_results);
+        $total_results = $em->getRepository('ckRecipesBundle:Recipe')->getNbResults($term);
+
+        $recipesList = array();
+
+        if($recipes)
+        {
+            foreach ($recipes as $recipe)
+            {
+                $recipesList[] = array(
+                    'id'          => $recipe->getId(),
+                    'title'       => $recipe->getName()
+                );
+            }
+        }
+
+        $response = new Response(json_encode(array('items' => $recipesList, 'total' => $total_results)));
+        $response->headers->set('Content-Type', 'application/json');
+        
+        return $response;
+    }
 }
