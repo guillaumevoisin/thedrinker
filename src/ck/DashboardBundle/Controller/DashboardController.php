@@ -14,7 +14,14 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        $repositoryManager = $this->get('fos_elastica.manager.orm');
+        $repository = $repositoryManager->getRepository('ckRecipesBundle:Recipe');
+
+        $recipes = $repository->filterFind('Penicillin');
+
+        return array(
+            'recipes' => $recipes,
+        );
     }
 
     /**

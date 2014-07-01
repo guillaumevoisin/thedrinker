@@ -3,7 +3,6 @@ namespace ck\RecipesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Mapping\Annotation as Gedmo;
 use ck\RecipesBundle\Entity\RecipesIngredients as RecipesIngredients;
 use ck\RecipesBundle\Entity\Ingredient as Ingredient;
@@ -13,10 +12,10 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Accessor;
 
 /**
- * @ORM\Entity(repositoryClass="ck\RecipesBundle\Entity\RecipesRepository")
+ * @ORM\Entity
  * @ORM\Table(name="recipes")
  * @ORM\HasLifecycleCallbacks
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("all")
  */
 class Recipe
 {
@@ -82,7 +81,7 @@ class Recipe
      * @ORM\ManyToMany(targetEntity="RecipesCategory", inversedBy="recipes")
      * @ORM\JoinTable(name="bind_recipes_categories",
      *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="ingredient_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="recipe_id", referencedColumnName="id")}
      *      )
      */
     private $categories;
@@ -91,7 +90,7 @@ class Recipe
      * @ORM\ManyToMany(targetEntity="RecipesTag", inversedBy="recipes")
      * @ORM\JoinTable(name="bind_recipes_tags",
      *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="ingredient_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="recipe_id", referencedColumnName="id")}
      *      )
      */
     private $tags;
@@ -163,7 +162,7 @@ class Recipe
      * @ORM\ManyToMany(targetEntity="ck\UsersBundle\Entity\User", mappedBy="favoriteRecipes")
      */
     private $usersFavorites;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="ck\UsersBundle\Entity\User", mappedBy="likes")
      * */
@@ -174,11 +173,10 @@ class Recipe
      * */
     private $comments;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -188,20 +186,20 @@ class Recipe
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Recipe
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -218,24 +216,24 @@ class Recipe
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->usersLikes = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Recipe
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -245,20 +243,20 @@ class Recipe
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Recipe
      */
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -268,20 +266,20 @@ class Recipe
     /**
      * Set glassType
      *
-     * @param string $glassType
+     * @param  string $glassType
      * @return Recipe
      */
     public function setGlassType($glassType)
     {
         $this->glassType = $glassType;
-    
+
         return $this;
     }
 
     /**
      * Get glassType
      *
-     * @return string 
+     * @return string
      */
     public function getGlassType()
     {
@@ -291,20 +289,20 @@ class Recipe
     /**
      * Set preparationType
      *
-     * @param string $preparationType
+     * @param  string $preparationType
      * @return Recipe
      */
     public function setPreparationType($preparationType)
     {
         $this->preparationType = $preparationType;
-    
+
         return $this;
     }
 
     /**
      * Get preparationType
      *
-     * @return string 
+     * @return string
      */
     public function getPreparationType()
     {
@@ -314,20 +312,20 @@ class Recipe
     /**
      * Set whereToDrink
      *
-     * @param string $whereToDrink
+     * @param  string $whereToDrink
      * @return Recipe
      */
     public function setWhereToDrink($whereToDrink)
     {
         $this->whereToDrink = $whereToDrink;
-    
+
         return $this;
     }
 
     /**
      * Get whereToDrink
      *
-     * @return string 
+     * @return string
      */
     public function getWhereToDrink()
     {
@@ -337,20 +335,20 @@ class Recipe
     /**
      * Set creator
      *
-     * @param string $creator
+     * @param  string $creator
      * @return Recipe
      */
     public function setCreator($creator)
     {
         $this->creator = $creator;
-    
+
         return $this;
     }
 
     /**
      * Get creator
      *
-     * @return string 
+     * @return string
      */
     public function getCreator()
     {
@@ -360,20 +358,20 @@ class Recipe
     /**
      * Set garnish
      *
-     * @param string $garnish
+     * @param  string $garnish
      * @return Recipe
      */
     public function setGarnish($garnish)
     {
         $this->garnish = $garnish;
-    
+
         return $this;
     }
 
     /**
      * Get garnish
      *
-     * @return string 
+     * @return string
      */
     public function getGarnish()
     {
@@ -383,20 +381,20 @@ class Recipe
     /**
      * Set difficulty
      *
-     * @param string $difficulty
+     * @param  string $difficulty
      * @return Recipe
      */
     public function setDifficulty($difficulty)
     {
         $this->difficulty = $difficulty;
-    
+
         return $this;
     }
 
     /**
      * Get difficulty
      *
-     * @return string 
+     * @return string
      */
     public function getDifficulty()
     {
@@ -406,20 +404,20 @@ class Recipe
     /**
      * Set path
      *
-     * @param string $path
+     * @param  string $path
      * @return Recipe
      */
     public function setPath($path)
     {
         $this->path = $path;
-    
+
         return $this;
     }
 
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
@@ -429,20 +427,20 @@ class Recipe
     /**
      * Set file
      *
-     * @param string $file
+     * @param  string $file
      * @return Recipe
      */
     public function setFile($file)
     {
         $this->file = $file;
-    
+
         return $this;
     }
 
     /**
      * Get file
      *
-     * @return string 
+     * @return string
      */
     public function getFile()
     {
@@ -452,13 +450,13 @@ class Recipe
     /**
      * Add ingredients
      *
-     * @param RecipesIngredients $recipesIngredients
+     * @param  RecipesIngredients $recipesIngredients
      * @return Recipe
      */
     public function addIngredient(RecipesIngredients $recipesIngredients)
     {
         $this->ingredients[] = $recipesIngredients;
-    
+
         return $this;
     }
 
@@ -475,7 +473,7 @@ class Recipe
     /**
      * Get ingredients
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getIngredients()
     {
@@ -485,13 +483,13 @@ class Recipe
     /**
      * Add categories
      *
-     * @param \ck\RecipesBundle\Entity\RecipesCategory $categories
+     * @param  \ck\RecipesBundle\Entity\RecipesCategory $categories
      * @return Recipe
      */
     public function addCategorie(\ck\RecipesBundle\Entity\RecipesCategory $categories)
     {
         $this->categories[] = $categories;
-    
+
         return $this;
     }
 
@@ -508,7 +506,7 @@ class Recipe
     /**
      * Get categories
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories()
     {
@@ -526,13 +524,13 @@ class Recipe
     /**
      * Add tags
      *
-     * @param \ck\RecipesBundle\Entity\RecipesTag $tags
+     * @param  \ck\RecipesBundle\Entity\RecipesTag $tags
      * @return Recipe
      */
     public function addTag(\ck\RecipesBundle\Entity\RecipesTag $tag)
     {
         $this->tags[] = $tag;
-    
+
         return $this;
     }
 
@@ -549,7 +547,7 @@ class Recipe
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -567,13 +565,13 @@ class Recipe
     /**
      * Add comments
      *
-     * @param \ck\RecipesBundle\Entity\RecipesComment $comments
+     * @param  \ck\RecipesBundle\Entity\RecipesComment $comments
      * @return Recipe
      */
     public function addComment(\ck\RecipesBundle\Entity\RecipesComment $comment)
     {
         $this->comments[] = $comment;
-    
+
         return $this;
     }
 
@@ -590,7 +588,7 @@ class Recipe
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
@@ -608,7 +606,7 @@ class Recipe
     /**
      * Get usersLikes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLikes()
     {
@@ -626,20 +624,20 @@ class Recipe
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Recipe
      */
     public function setCreated($created)
     {
         $this->created = $created;
-    
+
         return $this;
     }
 
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -649,20 +647,20 @@ class Recipe
     /**
      * Set updated
      *
-     * @param \DateTime $updated
+     * @param  \DateTime $updated
      * @return Recipe
      */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
-    
+
         return $this;
     }
 
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -672,20 +670,20 @@ class Recipe
     /**
      * Set createdBy
      *
-     * @param string $createdBy
+     * @param  string $createdBy
      * @return Entity
      */
     public function setCreatedBy($createdBy)
     {
         $this->createdBy = $createdBy;
-    
+
         return $this;
     }
 
     /**
      * Get createdBy
      *
-     * @return string 
+     * @return string
      */
     public function getCreatedBy()
     {
@@ -695,20 +693,20 @@ class Recipe
     /**
      * Set updatedBy
      *
-     * @param string $updatedBy
+     * @param  string $updatedBy
      * @return Entity
      */
     public function setUpdatedBy($updatedBy)
     {
         $this->updatedBy = $updatedBy;
-    
+
         return $this;
     }
 
     /**
      * Get updatedBy
      *
-     * @return string 
+     * @return string
      */
     public function getUpdatedBy()
     {
@@ -718,26 +716,25 @@ class Recipe
     /**
      * Set contentChangedBy
      *
-     * @param string $contentChangedBy
+     * @param  string $contentChangedBy
      * @return Entity
      */
     public function setContentChangedBy($contentChangedBy)
     {
         $this->contentChangedBy = $contentChangedBy;
-    
+
         return $this;
     }
 
     /**
      * Get contentChangedBy
      *
-     * @return string 
+     * @return string
      */
     public function getContentChangedBy()
     {
         return $this->contentChangedBy;
     }
-
 
     public function getAbsolutePath()
     {
@@ -803,15 +800,15 @@ class Recipe
         $totalProportions = 0;
         $totalIngdtsDegree = 0;
 
-        foreach ($ingredients as $ingredient)
-        {
+        foreach ($ingredients as $ingredient) {
             $ingdtPrct = $ingredient->getProportion() * ($ingredient->getIngredient()->getAlcoholVolume() / 100);
             $totalIngdtsDegree += $ingdtPrct;
 
-            if($ingredient->getUnit() == "dash")
+            if ($ingredient->getUnit() == "dash") {
                 $proportion = 0.1 * $ingredient->getProportion();
-            else
+            } else {
                 $proportion = $ingredient->getProportion();
+            }
 
             $totalProportions += $proportion;
         }
@@ -827,17 +824,16 @@ class Recipe
 
         $totalPrice = 0;
 
-        foreach ($ingredients as $ingredient)
-        {
+        foreach ($ingredients as $ingredient) {
             $ingdtPrice = $ingredient->getIngredient()->getPrice();
             $ingdtVolume = $ingredient->getIngredient()->getVolume();
 
-            if(!empty($ingdtPrice) && !empty($ingdtVolume))
-            {
-                if($ingredient->getUnit() == "dash")
+            if (!empty($ingdtPrice) && !empty($ingdtVolume)) {
+                if ($ingredient->getUnit() == "dash") {
                     $proportion = 0.1 * $ingredient->getProportion();
-                else
+                } else {
                     $proportion = $ingredient->getProportion();
+                }
 
                 $ingdtProportionPrice = ($ingdtPrice / $ingdtVolume) * $proportion;
                 $totalPrice += $ingdtProportionPrice;
@@ -846,7 +842,6 @@ class Recipe
 
         return round($totalPrice, 2);
     }
-
 
     public function __toString()
     {

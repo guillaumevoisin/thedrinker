@@ -59,6 +59,72 @@ fos_rest:
     routing_loader:
         default_format: json
 
+# FOS Elastica
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    serializer:
+        callback_class: FOS\ElasticaBundle\Serializer\Callback
+        serializer: serializer
+    indexes:
+        td:
+            client: default
+            types:
+                Recipe:
+                    mappings:
+                        name: ~
+                        ingredients: 
+                            type: "nested"
+                            properties:
+                                name: ~
+                        tags:
+                            type: "nested"
+                            properties:
+                                name: ~
+                                id : 
+                                    type : integer
+                        categories:
+                            type: "nested"
+                            properties:
+                                name: ~
+                                id : 
+                                    type : integer
+
+                    persistence:
+                        driver: orm # orm, mongodb, propel are available
+                        model:  ck\RecipesBundle\Entity\Recipe
+                        repository: ck\RecipesBundle\Entity\RecipesRepository
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                Ingredient:
+                    mappings:
+                        name: ~
+                    persistence:
+                        driver: orm
+                        model:  ck\RecipesBundle\Entity\Ingredient
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                Tags:
+                    mappings:
+                        name: ~
+                    persistence:
+                        driver: orm
+                        model:  ck\RecipesBundle\Entity\RecipesTag
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                Category:
+                    mappings:
+                        name: ~
+                    persistence:
+                        driver: orm
+                        model:  ck\RecipesBundle\Entity\RecipesCategory
+                        provider: ~
+                        listener: ~
+                        finder: ~
+
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
@@ -73,14 +139,15 @@ assetic:
         #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 
 liip_imagine:
-    driver:               gd
-    web_root:             %kernel.root_dir%/../web
-    data_root:            %kernel.root_dir%/../web
-    cache_mkdir_mode:     0777
-    cache_prefix:         /media/cache
-    cache:                web_path
-    cache_clearer:        true
-    data_loader:          filesystem
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web
+
+    resolvers:
+       default:
+          web_path: ~
+    
     filter_sets:
         thumb:
             quality: 75

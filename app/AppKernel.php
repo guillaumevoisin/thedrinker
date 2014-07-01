@@ -27,7 +27,8 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Bazinga\ExposeTranslationBundle\BazingaExposeTranslationBundle()
+            new Bazinga\ExposeTranslationBundle\BazingaExposeTranslationBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
