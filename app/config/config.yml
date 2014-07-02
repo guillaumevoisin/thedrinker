@@ -145,10 +145,14 @@ liip_imagine:
                 data_root: %kernel.root_dir%/../web
 
     resolvers:
-       default:
-          web_path: ~
-    
+        default:
+            web_path:
+                web_root: %kernel.root_dir%/../web
+
+    driver: gd
+
     filter_sets:
+        cache: ~
         thumb:
             quality: 75
             filters:

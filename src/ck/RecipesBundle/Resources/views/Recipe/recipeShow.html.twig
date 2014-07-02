@@ -42,7 +42,7 @@
             <div class="nav-arrow arrow-right"></div>
             
             <figure class="cocktail-img">
-                <a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}"><img src="{{ asset(recipe.getWebPath) | imagine_filter('cocktail_view') }}"/></a>
+                <a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}"><img src="{{ recipe.getWebPath | imagine_filter('cocktail_view') }}"/></a>
                 <h2><a href="{{ path('recipe_show', { 'slug': recipe.slug }) }}">{{ recipe.name }}</a></h2>
             </figure>
 
